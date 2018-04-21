@@ -1,5 +1,5 @@
 <template>
-  <div class="login tc">
+  <div class="b-login tc">
     <div class="content">
       <div class="title">管理员登录</div>
       <el-form :model="form" ref="form">

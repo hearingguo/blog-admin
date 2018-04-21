@@ -1,7 +1,5 @@
 <template>
-  <div id="admin">
-    <router-view/>
-  </div>
+  <router-view/>
 </template>
 
 <script lang="ts">
@@ -15,9 +13,9 @@ export default class Admin extends Vue {
 
 <style lang="less">
 @import '../assets/styles/vars.less';
-#admin{
+#admin {
   min-height: 100%;
-  display: flex;
-  align-items: center;
+  // display: flex;
+  // align-items: center;
 }
 </style>
