@@ -7,7 +7,20 @@
         <!-- sidebar -->
       <Sidebar/>
       
-      <el-main>Main</el-main>
+      <!-- main -->
+      <el-main>
+        <el-col :span="24" key="1">
+          <el-breadcrumb separator="/" class="breadcrumb">
+            <el-breadcrumb-item>文章管理</el-breadcrumb-item>
+            <el-breadcrumb-item>文章列表</el-breadcrumb-item>
+          </el-breadcrumb>
+        </el-col>
+        <el-col :span="24" key="2" class="content">
+          <transition name="fade" mode="out-in">
+            <router-view></router-view>
+          </transition>
+        </el-col>
+      </el-main>
       
     </el-container>
   </el-container>
@@ -44,6 +57,13 @@ export default class Home extends Vue {
     background: @in-bg;
     aside {
       background: #fff;
+    }
+
+    .el-main {
+      padding: 1rem;
+      .breadcrumb{
+        margin-bottom: 1rem;
+      }
     }
   }
 
