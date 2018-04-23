@@ -3,32 +3,24 @@
     <el-menu
       default-active="2"
       class="el-menu-vertical">
-      <el-submenu index="1">
-        <template slot="title">
-          <i class="el-icon-menu"></i>
-          <span>文章管理</span>
-        </template>
-        <el-menu-item-group>
-          <el-menu-item index="1-1">文章列表</el-menu-item>
-          <el-menu-item index="1-2">文章发布</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title">标签</span>
-      </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-menu"></i>
-        <span slot="title">评论</span>
-      </el-menu-item>
-      <!-- <el-menu-item index="4">
-        <i class="el-icon-menu"></i>
-        <span slot="title">留言墙</span>
-      </el-menu-item> -->
-      <el-menu-item index="5">
-        <i class="el-icon-menu"></i>
-        <span slot="title">信息管理</span>
-      </el-menu-item>
+      <template v-for="(item, index) in $router.options.routes">
+        <el-submenu :index="index" v-if="item.meta.show && !item.meta.leaf && item.children" :key="index">
+          <template slot="title">
+            <i class="el-icon-menu"></i>
+            <span class="title">{{item.name}}</span>
+          </template>
+          <el-menu-item v-for="child in item.children" :index="child.path" :key="child.path">
+            <i class="el-icon-menu"></i>
+            <span class="text">
+              {{child.name}}
+            </span>
+          </el-menu-item>
+        </el-submenu>
+        <el-menu-item v-if="item.meta.show && item.meta.leaf && item.children" :index="item.children[0].path" :key="index">
+          <i class="el-icon-menu" ></i>
+          <span>{{item.name}}</span>
+        </el-menu-item>
+      </template>
     </el-menu>
   </el-aside>
 </template>
@@ -39,6 +31,11 @@ import { Component, Vue } from 'vue-property-decorator'
 
 @Component
 export default class Sidebar extends Vue {
+
+  mounted () {
+    // @ts-ignore
+    console.log(this.$router.options.routes)
+  }
   
 }
 
