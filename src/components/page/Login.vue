@@ -91,7 +91,7 @@ export default class Login extends Vue {
   .content{
     width: 100%;
     max-width: 500px;
-    background: @in-bg;
+    background: @themelight;
     border-radius: @s-br;
     padding: 25px;
     .title{

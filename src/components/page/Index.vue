@@ -44,7 +44,7 @@ export default class Home extends Vue {
 
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
   @import '../../assets/styles/vars.less';
   .home > section {
     position: absolute;

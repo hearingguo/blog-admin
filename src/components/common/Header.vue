@@ -34,7 +34,7 @@ export default class Header extends Vue {
     height: 4.5rem;
     padding: 0 15px;
     width: 100%;
-    background: @m-bg;
+    background: @theme;
     .logo {
       a {
         color: #fff;
