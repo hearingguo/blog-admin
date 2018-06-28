@@ -7,7 +7,7 @@
       router>
       <template v-for="(item, index) in $router.options.routes">
         <el-submenu
-          v-if="item.meta.show && !item.meta.leaf && item.children"
+          v-if="item.meta.show && !item.meta.leaves && item.children"
           :index="index"
           :key="index">
           <template slot="title">
@@ -25,7 +25,7 @@
           </el-menu-item>
         </el-submenu>
         <el-menu-item
-          v-if="item.meta.show && item.meta.leaf && item.children"
+          v-if="item.meta.show && item.meta.leaves && item.children"
           :index="item.children[0].path"
           :key="index">
           <i class="el-icon-menu" ></i>

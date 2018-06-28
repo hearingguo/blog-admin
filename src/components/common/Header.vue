@@ -1,16 +1,14 @@
 <template>
-  <el-header class="clearfix">
-    <div class="logo fl">
-      <a href="/">
-        <span>highya</span>
-      </a>
+  <header class="b-header">
+    <div class="logo">
+      <router-link to="/">
+        <img src="../../assets/images/avatar.jpeg" alt="">highya
+      </router-link>
     </div>
-    <div class="avatar fr">
-      <a href="/">
-        <img src="../../assets/images/avatar.jpeg" alt="">
-      </a>
+    <div class="logout">
+      <el-button type="text">logout</el-button>
     </div>
-  </el-header>
+  </header>
 </template>
 
 <script lang="ts">
@@ -35,17 +33,25 @@ export default class Header extends Vue {
     padding: 0 15px;
     width: 100%;
     background: @theme;
+
+    .logout {
+      .el-button {
+        color: @white;
+      }
+    }
+
     .logo {
       a {
+        display: flex;
+        align-items: center;
         color: #fff;
         text-decoration: none;
         font-size: @f-m;
-      }
-    }
-    .avatar {
-      img {
-        border-radius: 50%;
-        width: 3rem;
+        img {
+          border-radius: 50%;
+          width: 3rem;
+          margin-right: @s-l;
+        }
       }
     }
   }

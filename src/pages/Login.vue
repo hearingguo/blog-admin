@@ -1,34 +1,36 @@
 <template>
-  <div class="b-login tc">
-    <div class="content">
-      <div class="title">管理员登录</div>
-      <el-form :model="form" ref="form">
-        <el-form-item
-          prop="username"
-          :rules="[
-            { required: true, message: '用户名', trigger: 'blur' },
-            { min: 5, message: '账号至少6位', trigger: 'blur' }
-          ]">
-          <el-input placeholder="管理员账号" v-model="form.username" :maxlength="40"></el-input>
-        </el-form-item>
-        <el-form-item
-          prop="password"
-          :rules="[
-            { required: true, message: '密码', trigger: 'blur' },
-            { min: 6, message: '密码至少6位', trigger: 'blur' }
-          ]">
-          <el-input 
-            placeholder="密码" 
-            v-model="form.password" 
-            :maxlength="40" 
-            type="password"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submit">Submit</el-button>
-        </el-form-item>
-      </el-form>
-    </div>
-  </div>
+  <el-row class="b-login tc">
+    <el-col :span="8">
+      <el-card class="content">
+        <div class="title">管理员登录</div>
+        <el-form :model="form" ref="form">
+          <el-form-item
+            prop="username"
+            :rules="[
+              { required: true, message: '用户名', trigger: 'blur' },
+              { min: 5, message: '账号至少5位', trigger: 'blur' }
+            ]">
+            <el-input placeholder="管理员账号" v-model="form.username" :maxlength="40"></el-input>
+          </el-form-item>
+          <el-form-item
+            prop="password"
+            :rules="[
+              { required: true, message: '密码', trigger: 'blur' },
+              { min: 6, message: '密码至少6位', trigger: 'blur' }
+            ]">
+            <el-input 
+              placeholder="密码" 
+              v-model="form.password" 
+              :maxlength="40" 
+              type="password"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="submit">Submit</el-button>
+          </el-form-item>
+        </el-form>
+      </el-card>
+    </el-col>
+  </el-row>
 </template>
 
 <script lang="ts">
@@ -81,21 +83,24 @@ export default class Login extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
-@import '../../assets/styles/vars.less';
-.login {
+@import '../assets/styles/vars.less';
+
+@login-w: 500px;
+
+.b-login {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
+
   .content{
     width: 100%;
-    max-width: 500px;
-    background: @themelight;
-    border-radius: @s-br;
-    padding: 25px;
+    width: @login-w;
+    padding: @xl-l;
+    
     .title{
-      margin-bottom: 20px;
+      margin-bottom: @xl-l;
     }
   }
 }

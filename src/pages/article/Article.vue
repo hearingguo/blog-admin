@@ -56,7 +56,7 @@
 <script lang="ts">
 
 import { Component, Vue } from 'vue-property-decorator'
-import FilterCard from '../../common/FilterCard.vue'
+import FilterCard from '@/components/common/FilterCard.vue'
 
 @Component({
   components: {

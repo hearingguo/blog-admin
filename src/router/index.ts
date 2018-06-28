@@ -1,12 +1,24 @@
 import Vue from 'vue'
 import Router, { RouteConfig } from 'vue-router'
-import login from '../components/page/Login.vue'
-import index from '../components/page/Index.vue'
-import article from '../components/page/article/Article.vue'
-import release from '../components/page/article/Release.vue'
-import Tags from '../components/page/tags/Tags.vue' 
-import Comment from '../components/page/comment/Comment.vue' 
-import Info from '../components/page/info/Info.vue' 
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
+// login
+import login from '../pages/Login.vue'
+import index from '../pages/Index.vue'
+
+// article manage
+import article from '../pages/article/Article.vue'
+import release from '../pages/article/Release.vue'
+
+// tag manage
+import Tags from '../pages/tags/Tags.vue' 
+
+// comments
+import Comment from '../pages/comment/Comment.vue' 
+
+// info for myself
+import Info from '../pages/info/Info.vue' 
 
 Vue.use(Router)
 
@@ -15,19 +27,19 @@ const routes: RouteConfig[] = [
     path: '/',
     name: 'login',
     component: login,
-    meta: { leaf: true, show: false }
+    meta: { leaves: true, show: false }
   },
   {
     path: '/home',
     name: 'home',
     component: index,
-    meta: { leaf: true, show: false }
+    meta: { requiresAuth: true, leaves: true, show: false }
   },
   {
     path: '/',
     name: '文章管理',
     component: index,
-    meta: { leaf: false, show: true },
+    meta: { requiresAuth: true, leaves: false, show: true },
     children: [
       { path: '/article/index', component: article, name: '文章列表' },
       { path: '/article/release', component: release, name: '文章发布' }
@@ -37,7 +49,7 @@ const routes: RouteConfig[] = [
     path: '/',
     name: '文章标签',
     component: index,
-    meta: { leaf: true, show: true },
+    meta: { requiresAuth: true, leaves: true, show: true },
     children: [
       { path: '/tags', component: Tags, name: '文章标签' }
     ]
@@ -46,7 +58,7 @@ const routes: RouteConfig[] = [
     path: '/',
     name: '评论',
     component: index,
-    meta: { leaf: true, show: true },
+    meta: { requiresAuth: true, leaves: true, show: true },
     children: [
       { path: '/comment', component: Comment, name: '评论' }
     ]
@@ -55,7 +67,7 @@ const routes: RouteConfig[] = [
     path: '/',
     name: '信息管理',
     component: index,
-    meta: { leaf: true, show: true },
+    meta: { requiresAuth: true, leaves: true, show: true },
     children: [
       { path: '/info', component: Info, name: '信息管理' }
     ]
@@ -65,6 +77,15 @@ const routes: RouteConfig[] = [
 const router: Router = new Router({
   mode: 'history',
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  NProgress.start()
+  next()
+})
+
+router.afterEach(transition => {
+  NProgress.done()
 })
 
 export default router
