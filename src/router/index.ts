@@ -39,17 +39,17 @@ const routes: RouteConfig[] = [
     path: '/',
     name: '文章管理',
     component: index,
-    meta: { requiresAuth: true, leaves: false, show: true },
+    meta: { requiresAuth: true, leaves: false, icon: 'icon-article',  show: true },
     children: [
-      { path: '/article/index', component: article, name: '文章列表' },
-      { path: '/article/release', component: release, name: '文章发布' }
+      { path: '/article/index', component: article, name: '文章列表', meta: { icon: 'icon-list'}},
+      { path: '/article/release', component: release, name: '文章发布', meta: { icon: 'icon-release'}}
     ]
   },
   {
     path: '/',
     name: '文章标签',
     component: index,
-    meta: { requiresAuth: true, leaves: true, show: true },
+    meta: { requiresAuth: true, leaves: true, icon: 'icon-tags', show: true },
     children: [
       { path: '/tags', component: Tags, name: '文章标签' }
     ]
@@ -58,7 +58,7 @@ const routes: RouteConfig[] = [
     path: '/',
     name: '评论',
     component: index,
-    meta: { requiresAuth: true, leaves: true, show: true },
+    meta: { requiresAuth: true, leaves: true, icon: 'icon-comment', show: true },
     children: [
       { path: '/comment', component: Comment, name: '评论' }
     ]
@@ -67,7 +67,7 @@ const routes: RouteConfig[] = [
     path: '/',
     name: '信息管理',
     component: index,
-    meta: { requiresAuth: true, leaves: true, show: true },
+    meta: { requiresAuth: true, leaves: true, icon: 'icon-setting', show: true },
     children: [
       { path: '/info', component: Info, name: '信息管理' }
     ]

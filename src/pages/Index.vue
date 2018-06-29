@@ -49,6 +49,12 @@ export default class Home extends Vue {
 <style lang="less">
   @import '../assets/styles/vars.less';
 
+  .content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
   .home > section {
     position: absolute;
     left: 0;

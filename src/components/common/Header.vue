@@ -1,10 +1,12 @@
 <template>
   <header class="b-header">
+    <!-- left -->
     <div class="logo">
       <router-link to="/">
         <img src="../../assets/images/avatar.jpeg" alt="">highya
       </router-link>
     </div>
+    <!-- right -->
     <div class="logout">
       <el-button type="text">logout</el-button>
     </div>
@@ -24,6 +26,7 @@ export default class Header extends Vue {
 
 <style lang="less" scoped>
   @import '../../assets/styles/vars.less';
+
   header {
     display: flex;
     align-items: center;

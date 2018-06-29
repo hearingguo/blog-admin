@@ -11,14 +11,14 @@
           :index="index"
           :key="index">
           <template slot="title">
-            <i class="el-icon-menu"></i>
+            <i :class="['iconfont', item.meta.icon]"></i>
             <span class="title">{{item.name}}</span>
           </template>
           <el-menu-item
             v-for="child in item.children"
             :index="child.path"
             :key="child.path">
-            <i class="el-icon-menu"></i>
+            <i :class="['iconfont', child.meta.icon]"></i>
             <span class="text">
               {{child.name}}
             </span>
@@ -28,7 +28,7 @@
           v-if="item.meta.show && item.meta.leaves && item.children"
           :index="item.children[0].path"
           :key="index">
-          <i class="el-icon-menu" ></i>
+          <i :class="['iconfont', item.meta.icon]"></i>
           <span>{{item.name}}</span>
         </el-menu-item>
       </template>
@@ -55,5 +55,15 @@ export default class Sidebar extends Vue {
 </script>
 
 <style lang="less" scoped>
+
+  @import '../../assets/styles/vars.less';
+
+  .sidebar {
+    background: @white;
+    border-right: 1px solid @border;
+    .el-menu {
+      border-right: 0;
+    }
+  }
 
 </style>
