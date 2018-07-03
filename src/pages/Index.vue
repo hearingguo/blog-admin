@@ -67,13 +67,6 @@ export default class Home extends Vue {
     aside {
       background: #fff;
     }
-
-    .el-main {
-      padding: 1rem;
-      .breadcrumb{
-        margin-bottom: 1rem;
-      }
-    }
   }
 
 </style>

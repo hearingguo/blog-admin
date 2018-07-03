@@ -4,21 +4,21 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 // login
-import login from '../pages/Login.vue'
-import index from '../pages/Index.vue'
+import login from '@/pages/Login.vue'
+import index from '@/pages/Index.vue'
 
 // article manage
-import article from '../pages/article/Article.vue'
-import release from '../pages/article/Release.vue'
+import article from '@/pages/article/Article.vue'
+import release from '@/pages/article/Release.vue'
 
 // tag manage
-import Tags from '../pages/tags/Tags.vue' 
+import Tags from '@/pages/tags/Tags.vue' 
 
 // comments
-import Comment from '../pages/comment/Comment.vue' 
+import Comment from '@/pages/comment/Comment.vue' 
 
 // info for myself
-import Info from '../pages/info/Info.vue' 
+import Info from '@/pages/info/Info.vue' 
 
 Vue.use(Router)
 

@@ -1,14 +1,23 @@
 <template>
   <div class="filter-card">
-    <div class="item">
-      <span>标签:</span>
-      <el-radio-group v-model="radio2">
-        <el-radio-button label="上海"></el-radio-button>
-        <el-radio-button label="北京"></el-radio-button>
-        <el-radio-button label="广州"></el-radio-button>
-        <el-radio-button label="深圳"></el-radio-button>
-      </el-radio-group>
-    </div>
+    <el-form ref="form" :model="articleForm" label-width="60px">
+      <!-- tags -->
+      <el-form-item label="标签:">
+        <el-radio-group v-model="articleForm.tag" size="small">
+          <el-radio-button 
+            v-for="(item, index) in articleTags"
+            :label="item.id"
+            :key="index">{{ item.value }}</el-radio-button>
+        </el-radio-group>
+      </el-form-item>
+      <!-- 权限 -->
+      <el-form-item label="权限:">
+        <el-radio-group v-model="articleForm.authority" size="small">
+          <el-radio :label="0">私密</el-radio>
+          <el-radio :label="1">公开</el-radio>
+        </el-radio-group>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
@@ -16,10 +25,41 @@
 
 import { Component, Vue, Prop } from 'vue-property-decorator'
 
+interface ArticleForm {
+  tag: number | string
+  authority: number | string
+}
+
+interface TagItem {
+  id: number
+  value: string
+}
+
 @Component
 export default class FilterCard extends Vue {
+  private articleForm: ArticleForm = {
+    tag: '',
+    authority: ''
+  }
 
-  private radio2: string = '上海'
+  private articleTags: TagItem[] = [
+    {
+      id: 1,
+      value: 'javascript'
+    },
+    {
+      id: 2,
+      value: 'nodejs'
+    },
+    {
+      id: 3,
+      value: 'css'
+    },
+    {
+      id: 4,
+      value: 'html'
+    }
+  ]
 
   // @Prop()
   // readonly 
@@ -32,39 +72,12 @@ export default class FilterCard extends Vue {
 <style lang="less" scoped>
 @import '../../assets/styles/vars.less';
 .filter-card {
-  .item {
-    display: flex;
-    position: relative;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-    line-height: 34px;
-    border-bottom: 1px dashed rgba(210, 210, 210, 0.274);
-    > span {
-      width: 4rem;
-      flex-shrink: 0;
-      text-align: right;
-    }
-    .el-radio-group {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      margin-left: 10px;
-      .el-radio-button {
-        margin: 0 3px;
-      }
-      .el-radio-button__inner {
-        border: none;
-        border-radius: 4px;
-      }
-      .is-active {
-        background: #f00;
-        .el-radio-button__inner {
-          background: @theme;
-          box-shadow: none;
-        }
-      }
+  .el-radio-group {
+    > label {
+      margin: 0 @s-l;
     }
   }
+  
 }
 
 </style>
