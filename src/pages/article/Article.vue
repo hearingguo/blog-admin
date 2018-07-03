@@ -1,17 +1,38 @@
 <template>
   <div class="article">
-    <el-card class="box-card mb1" shadow="never">
-      <FilterCard/>
-    </el-card>
-    <div class="article-table p1 clearfix">
+    <!-- filter -->
+    <FilterCard/>
+
+    <!-- article list -->
+    <div class="article-list">
+      <!-- ctrol -->
+      <el-row class="article-ctrls mb1">
+        <el-button type="primary" size="small">发布</el-button>
+        <el-button size="small">撤消</el-button>
+      </el-row>
+
+      <!-- table -->
       <el-table
+        class="article-table"
         :data="tableData4"
-        style="width: 100%"
-        max-height="250"
-        empty-text="-">
+        border
+        empty-text="No Data">
+        <el-table-column type="expand">
+          <template slot-scope="props">
+            {{ props.row.date }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          type="selection"
+          width="50">
+        </el-table-column>
         <el-table-column
           prop="date"
           label="日期">
+          <template slot-scope="scope">
+            <i class="el-icon-time"></i>
+            <span style="margin-left: 10px">{{ scope.row.date }}</span>
+          </template>
         </el-table-column>
         <el-table-column
           prop="title"
@@ -45,6 +66,8 @@
           </template>
         </el-table-column>
       </el-table>
+
+      <!-- pagination -->
       <el-pagination class="mt1 fr"
       layout="total, prev, pager, next"
       :total="1000">
@@ -91,11 +114,11 @@ export default class Article extends Vue {
 </script>
 
 <style lang="less" scoped>
+@import '../../assets/styles/vars.less';
 
-.article-table {
-  background: #fff;
-  padding-bottom: 2rem;
-  border-radius: 4px;
+.article-list {
+  border-top: 1px solid @border;
+  padding: @xl-l 0 @xxl-l;
 }
 
 </style>

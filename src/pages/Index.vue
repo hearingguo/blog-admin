@@ -10,21 +10,24 @@
         
         <!-- main -->
         <el-main>
+          <!-- breadcrumb -->
           <el-col :span="24" key="1">
             <el-breadcrumb separator="/" class="breadcrumb">
               <el-breadcrumb-item>文章管理</el-breadcrumb-item>
               <el-breadcrumb-item>文章列表</el-breadcrumb-item>
             </el-breadcrumb>
           </el-col>
+
+          <!-- content -->
           <el-col :span="24" key="2" class="content">
             <transition name="fade" mode="out-in">
-              <router-view></router-view>
+              <el-card class="box-card mb1" shadow="never">
+                <router-view></router-view>
+              </el-card>
             </transition>
           </el-col>
         </el-main>
-
       </el-container>
-      
     </el-row>
 </template>
 
