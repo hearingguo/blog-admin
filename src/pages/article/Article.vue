@@ -14,7 +14,7 @@
       <!-- table -->
       <el-table
         class="article-table"
-        :data="tableData4"
+        :data="articleList"
         border
         empty-text="No Data">
         <el-table-column type="expand">
@@ -70,7 +70,7 @@
       <!-- pagination -->
       <el-pagination class="mt1 fr"
       layout="total, prev, pager, next"
-      :total="1000">
+      :total="articleList.length">
     </el-pagination>
     </div>
   </div>
@@ -88,7 +88,7 @@ import FilterCard from '@/components/common/FilterCard.vue'
 })
 export default class Article extends Vue {
 
-  private tableData4 =  [{
+  private articleList =  [{
           id: 1,
           date: '2016-05-03',
           title: '文章一',
@@ -118,7 +118,7 @@ export default class Article extends Vue {
 
 .article-list {
   border-top: 1px solid @border;
-  padding: @xl-l 0 @xxl-l;
+  padding: @xl-l 0 @xxxl-l;
 }
 
 </style>
