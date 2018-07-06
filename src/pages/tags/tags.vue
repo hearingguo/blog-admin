@@ -1,36 +1,78 @@
 <template>
   <div class="tags">
-    <el-form label-width="80px">
 
-      <!-- classify -->
-      <Tag
-        label="分类管理"
-        :tags.sync='classifies'/>
+    <div class="tags-ctrl">
+      <el-button type="primary" plain @click="addTag('添加标签')">添加标签</el-button>
+      <el-button type="primary" plain @click="addTag('添加分类')">添加分类</el-button>
+    </div>
 
-      <!-- tags -->
-      <Tag
-      label="分类管理"
-      :tags.sync='tags'/>
+    <!-- modal -->
+    <ModalTag 
+      :title="title"
+      :visible.sync="visible"/>
 
-    </el-form>
+    <!-- 标签list -->
+    <TableTags 
+      title="标签"
+      :tagsData="tags" />
+    
+
+    <!-- 分类list -->
+    <TableTags 
+      title="分类"
+      :tagsData="classifies" />
+
   </div>
 </template>
 
 <script lang="ts">
 
 import { Component, Vue } from 'vue-property-decorator'
-import Tag from '@/components/common/Tags.vue'
+import ModalTag from '@/components/ModalTag.vue'
+import TableTags from '@/components/TableTags.vue'
 
 @Component({
   components: {
-    Tag
+    ModalTag,
+    TableTags
   }
 })
 export default class Tags extends Vue {
 
-  private classifies: string[] = ['high 码', 'high 读', 'high 活']
+  private visible: boolean = false
 
-  private tags: string[] = ['html', 'css', 'nodejs', 'javascript', 'webpack']
+  private title: string = ''
+
+  private classifies = [
+    {
+      name: 'high coding',
+      desc: 'coding相关',
+      article: 10
+    },
+    {
+      name: 'high reading',
+      desc: 'reading相关',
+      article: 10
+    },
+    {
+      name: 'high living',
+      desc: 'living相关',
+      article: 10
+    }
+  ]
+
+  private tags = [
+    {
+      name: 'javascript',
+      desc: 'javascript相关',
+      article: 10
+    }
+  ]
+
+  private addTag (title: string) {
+    this.visible = true
+    this.title = title
+  }
 
 }
 

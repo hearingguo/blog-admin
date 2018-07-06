@@ -6,9 +6,9 @@
     <!-- article list -->
     <div class="article-list">
       <!-- ctrol -->
-      <el-row class="article-ctrls mb1">
-        <el-button type="primary" size="small">发布</el-button>
-        <el-button size="small">撤消</el-button>
+      <el-row class="article-ctrls mb1 tr">
+        <el-button type="primary">发布</el-button>
+        <el-button>撤消</el-button>
       </el-row>
 
       <!-- table -->
@@ -54,13 +54,13 @@
           label="操作">
           <template slot-scope="scope">
             <el-button plain
-              type="info"
-              size="small">
+              type="primary"
+              >
               编辑
             </el-button>
             <el-button plain
-              type="info"
-              size="small">
+              type="primary"
+              >
               {{ scope.row.release?'私密':'公开' }}
             </el-button>
           </template>
@@ -79,7 +79,7 @@
 <script lang="ts">
 
 import { Component, Vue } from 'vue-property-decorator'
-import FilterCard from '@/components/common/FilterCard.vue'
+import FilterCard from '@/components/FilterCard.vue'
 
 @Component({
   components: {
@@ -117,7 +117,6 @@ export default class Article extends Vue {
 @import '../../assets/styles/vars.less';
 
 .article-list {
-  border-top: 1px solid @border;
   padding: @xl-l 0 @xxxl-l;
 }
 

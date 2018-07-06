@@ -3,7 +3,7 @@
     <el-form ref="form" :model="articleForm" label-width="80px">
       <!-- tags -->
       <el-form-item label="分类">
-        <el-radio-group v-model="articleForm.classify" size="small">
+        <el-radio-group v-model="articleForm.classify" >
           <el-radio-button 
             v-for="(item, index) in articleClassifies"
             :label="item.id"
@@ -13,7 +13,7 @@
 
       <!-- tags -->
       <el-form-item label="标签">
-        <el-checkbox-group v-model="articleForm.tag" size="small">
+        <el-checkbox-group v-model="articleForm.tag" >
           <el-checkbox-button 
             v-for="(item, index) in articleTags"
             :label="item.id"
@@ -23,10 +23,19 @@
       
       <!-- 权限 -->
       <el-form-item label="权限">
-        <el-radio-group v-model="articleForm.authority" size="small">
-          <el-radio :label="1">私密</el-radio>
-          <el-radio :label="2">公开</el-radio>
+        <el-radio-group v-model="articleForm.release" >
+          <el-radio-button :label="0">全部</el-radio-button>
+          <el-radio-button :label="1">私密</el-radio-button>
+          <el-radio-button :label="2">公开</el-radio-button>
         </el-radio-group>
+      </el-form-item>
+
+      <!-- 搜索 -->
+      <el-form-item label="搜索">
+        <el-col :span="5">
+          <el-input v-model="articleForm.search" placeholder="搜索" ></el-input>
+        </el-col>
+        <el-button class="ml1" type="primary" icon="el-icon-search" >查询</el-button>
       </el-form-item>
 
     </el-form>
@@ -41,6 +50,7 @@ interface ArticleForm {
   classify: number | string
   tag: Array<number|string>
   release: number | string
+  search: string
 }
 
 interface Item {
@@ -52,11 +62,16 @@ interface Item {
 export default class FilterCard extends Vue {
   private articleForm: ArticleForm = {
     classify: 0,
-    tag: [''],
-    release: 0
+    tag: [0],
+    release: 0,
+    search: ''
   }
 
   private articleClassifies: Item[] = [
+    {
+      id: 0,
+      value: '全部'
+    },
     {
       id: 1,
       value: 'high码'
@@ -72,6 +87,10 @@ export default class FilterCard extends Vue {
   ]
 
   private articleTags: Item[] = [
+    {
+      id: 0,
+      value: '全部'
+    },
     {
       id: 1,
       value: 'javascript'
@@ -99,13 +118,19 @@ export default class FilterCard extends Vue {
 </script>
 
 <style lang="less" scoped>
-@import '../../assets/styles/vars.less';
+@import '../assets/styles/vars.less';
 
 .filter-card {
   .el-radio-group, .el-checkbox-group {
     > label {
       margin: 0 @s-l;
     }
+  }
+
+  .el-form-item {
+    border-bottom: 1px dashed @border;
+    margin: 0;
+    padding: @s-l 0;
   }
   
 }

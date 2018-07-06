@@ -56,7 +56,7 @@ export default class Sidebar extends Vue {
 
 <style lang="less" scoped>
 
-  @import '../../assets/styles/vars.less';
+  @import '../assets/styles/vars.less';
 
   .sidebar {
     background: @white;

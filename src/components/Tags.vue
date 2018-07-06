@@ -15,12 +15,12 @@
         v-if="inputVisible"
         v-model="inputValue"
         ref="saveTagInput"
-        size="small"
+        
         @keyup.enter.native="handleInputConfirm"
         @blur="handleInputConfirm"
       >
       </el-input>
-      <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+      <el-button v-else class="button-new-tag"  @click="showInput">+ New Tag</el-button>
     </el-form-item>
   </div>
 </template>
@@ -68,7 +68,7 @@ export default class Tags extends Vue {
 
 <style lang="less" scoped>
 
-  @import '../../assets/styles/vars.less';
+  @import '../assets/styles/vars.less';
 
   .el-tag + .el-tag {
     margin-left: @s-l;
