@@ -28,9 +28,9 @@
         label="操作"
         width="220">
         <template slot-scope="scope">
-          <el-button>编辑</el-button>
-          <el-button>隐藏</el-button>
-          <el-button plain type="danger">删除</el-button>
+          <el-button size="small">编辑</el-button>
+          <el-button size="small">隐藏</el-button>
+          <el-button plain type="danger" size="small">删除</el-button>
         </template>
       </el-table-column>
     </el-table>

@@ -253,7 +253,7 @@
         text-decoration: none;
         -webkit-transition: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
         transition: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-        color: #303133; }
+        color: #495060; }
         .el-breadcrumb__inner.is-link:hover, .el-breadcrumb__inner a:hover {
           color: #18212d;
           cursor: pointer; }

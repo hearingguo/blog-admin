@@ -7,8 +7,8 @@
     <div class="article-list">
       <!-- ctrol -->
       <el-row class="article-ctrls mb1 tr">
-        <el-button type="primary">发布</el-button>
-        <el-button plain type="primary">撤消</el-button>
+        <el-button type="primary" size="small">发布</el-button>
+        <el-button plain type="primary" size="small">撤消</el-button>
       </el-row>
 
       <!-- table -->
@@ -53,10 +53,10 @@
           fixed="right"
           label="操作">
           <template slot-scope="scope">
-            <el-button>
+            <el-button size="small">
               编辑
             </el-button>
-            <el-button type="primary">
+            <el-button type="primary" size="small">
               {{ scope.row.release?'私密':'公开' }}
             </el-button>
           </template>

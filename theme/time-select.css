@@ -616,7 +616,7 @@
     line-height: 32px;
     font-size: 14px;
     width: 5%;
-    color: #303133; }
+    color: #495060; }
   .el-date-editor .el-range__close-icon {
     font-size: 14px;
     color: #c0c4cc;
@@ -1101,7 +1101,7 @@
       cursor: not-allowed; }
   .el-picker-panel__icon-btn {
     font-size: 12px;
-    color: #303133;
+    color: #495060;
     border: 0;
     background: transparent;
     cursor: pointer;

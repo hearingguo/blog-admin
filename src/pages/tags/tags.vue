@@ -2,9 +2,9 @@
   <div class="tags">
 
     <div class="tags-ctrl pb1 clearfix">
-      <el-button type="primary" @click="addTag('添加标签')" icon="el-icon-plus">添加标签</el-button>
-      <el-button type="primary" @click="addTag('添加分类')" icon="el-icon-plus">添加分类</el-button>
-      <el-input class="search fr" type="search" suffix-icon="el-icon-search"></el-input>
+      <el-button type="primary" @click="addTag('添加标签')" icon="el-icon-plus" size="small">添加标签</el-button>
+      <el-button type="primary" @click="addTag('添加分类')" icon="el-icon-plus" size="small">添加分类</el-button>
+      <el-input class="search fr" type="search" suffix-icon="el-icon-search" size="small"></el-input>
     </div>
 
     <!-- modal -->

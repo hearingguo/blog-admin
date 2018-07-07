@@ -3,8 +3,8 @@
     <el-form ref="form" :model="articleForm" label-width="80px">
       <!-- tags -->
       <el-form-item label="分类">
-        <el-radio-group v-model="articleForm.classify" >
-          <el-radio-button 
+        <el-radio-group v-model="articleForm.classify" size="small">
+          <el-radio-button
             v-for="(item, index) in articleClassifies"
             :label="item.id"
             :key="index">{{ item.value }}</el-radio-button>
@@ -13,8 +13,8 @@
 
       <!-- tags -->
       <el-form-item label="标签">
-        <el-checkbox-group v-model="articleForm.tag" >
-          <el-checkbox-button 
+        <el-checkbox-group v-model="articleForm.tag" size="small">
+          <el-checkbox-button
             v-for="(item, index) in articleTags"
             :label="item.id"
             :key="index">{{ item.value }}</el-checkbox-button>
@@ -23,7 +23,7 @@
       
       <!-- 权限 -->
       <el-form-item label="权限">
-        <el-radio-group v-model="articleForm.release" >
+        <el-radio-group v-model="articleForm.release" size="small">
           <el-radio-button :label="0">全部</el-radio-button>
           <el-radio-button :label="1">私密</el-radio-button>
           <el-radio-button :label="2">公开</el-radio-button>
@@ -33,9 +33,9 @@
       <!-- 搜索 -->
       <el-form-item label="搜索">
         <el-col :span="5">
-          <el-input v-model="articleForm.search" placeholder="搜索" ></el-input>
+          <el-input v-model="articleForm.search" size="small" placeholder="搜索" ></el-input>
         </el-col>
-        <el-button class="ml1" type="primary" icon="el-icon-search" >查询</el-button>
+        <el-button class="ml1" type="primary" size="small" icon="el-icon-search" >查询</el-button>
       </el-form-item>
 
     </el-form>

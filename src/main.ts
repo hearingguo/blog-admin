@@ -12,7 +12,7 @@ import '@/assets/styles/index.less'
 
 Vue.config.productionTip = false
 
-Vue.use(ElementUi, { size: 'small', zIndex: 3000 })
+Vue.use(ElementUi, { size: 'medium', zIndex: 3000 })
 
 /* eslint-disable no-new */
 new Vue({
