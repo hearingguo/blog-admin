@@ -10,29 +10,32 @@
         
         <!-- main -->
         <el-main>
+          <!-- breadcrumb -->
           <el-col :span="24" key="1">
             <el-breadcrumb separator="/" class="breadcrumb">
               <el-breadcrumb-item>文章管理</el-breadcrumb-item>
               <el-breadcrumb-item>文章列表</el-breadcrumb-item>
             </el-breadcrumb>
           </el-col>
+
+          <!-- content -->
           <el-col :span="24" key="2" class="content">
             <transition name="fade" mode="out-in">
-              <router-view></router-view>
+              <el-card class="box-card mb1" shadow="never">
+                <router-view></router-view>
+              </el-card>
             </transition>
           </el-col>
         </el-main>
-
       </el-container>
-      
     </el-row>
 </template>
 
 <script lang="ts">
 
 import { Component, Vue } from 'vue-property-decorator'
-import Header from '@/components/common/Header.vue'
-import Sidebar from '@/components/common/Sidebar.vue'
+import Header from '@/components/Header.vue'
+import Sidebar from '@/components/Sidebar.vue'
 
 @Component({
   components: {
@@ -66,13 +69,6 @@ export default class Home extends Vue {
     background: @in-bg;
     aside {
       background: #fff;
-    }
-
-    .el-main {
-      padding: 1rem;
-      .breadcrumb{
-        margin-bottom: 1rem;
-      }
     }
   }
 

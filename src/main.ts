@@ -6,7 +6,7 @@ import router from './router/index'
 import store from './store/index'
 
 import ElementUi from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import '../theme/index.css'
 
 import '@/assets/styles/index.less'
 

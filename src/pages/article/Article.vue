@@ -1,17 +1,38 @@
 <template>
   <div class="article">
-    <el-card class="box-card mb1" shadow="never">
-      <FilterCard/>
-    </el-card>
-    <div class="article-table p1 clearfix">
+    <!-- filter -->
+    <FilterCard/>
+
+    <!-- article list -->
+    <div class="article-list">
+      <!-- ctrol -->
+      <el-row class="article-ctrls mb1 tr">
+        <el-button type="primary">发布</el-button>
+        <el-button plain type="primary">撤消</el-button>
+      </el-row>
+
+      <!-- table -->
       <el-table
-        :data="tableData4"
-        style="width: 100%"
-        max-height="250"
-        empty-text="-">
+        class="article-table"
+        :data="articleList"
+        border
+        empty-text="No Data">
+        <el-table-column type="expand">
+          <template slot-scope="props">
+            {{ props.row.date }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          type="selection"
+          width="50">
+        </el-table-column>
         <el-table-column
           prop="date"
           label="日期">
+          <template slot-scope="scope">
+            <i class="el-icon-time"></i>
+            <span style="margin-left: 10px">{{ scope.row.date }}</span>
+          </template>
         </el-table-column>
         <el-table-column
           prop="title"
@@ -32,22 +53,20 @@
           fixed="right"
           label="操作">
           <template slot-scope="scope">
-            <el-button plain
-              type="info"
-              size="small">
+            <el-button>
               编辑
             </el-button>
-            <el-button plain
-              type="info"
-              size="small">
+            <el-button type="primary">
               {{ scope.row.release?'私密':'公开' }}
             </el-button>
           </template>
         </el-table-column>
       </el-table>
+
+      <!-- pagination -->
       <el-pagination class="mt1 fr"
       layout="total, prev, pager, next"
-      :total="1000">
+      :total="articleList.length">
     </el-pagination>
     </div>
   </div>
@@ -56,7 +75,7 @@
 <script lang="ts">
 
 import { Component, Vue } from 'vue-property-decorator'
-import FilterCard from '@/components/common/FilterCard.vue'
+import FilterCard from '@/components/FilterCard.vue'
 
 @Component({
   components: {
@@ -65,7 +84,7 @@ import FilterCard from '@/components/common/FilterCard.vue'
 })
 export default class Article extends Vue {
 
-  private tableData4 =  [{
+  private articleList =  [{
           id: 1,
           date: '2016-05-03',
           title: '文章一',
@@ -91,11 +110,10 @@ export default class Article extends Vue {
 </script>
 
 <style lang="less" scoped>
+@import '../../assets/styles/vars.less';
 
-.article-table {
-  background: #fff;
-  padding-bottom: 2rem;
-  border-radius: 4px;
+.article-list {
+  padding: @xl-l 0 @xxxl-l;
 }
 
 </style>

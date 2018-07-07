@@ -3,7 +3,7 @@
     <!-- left -->
     <div class="logo">
       <router-link to="/">
-        <img src="../../assets/images/avatar.jpeg" alt="">highya
+        <img src="../assets/images/avatar.jpeg" alt="">highya
       </router-link>
     </div>
     <!-- right -->
@@ -25,7 +25,7 @@ export default class Header extends Vue {
 </script>
 
 <style lang="less" scoped>
-  @import '../../assets/styles/vars.less';
+  @import '../assets/styles/vars.less';
 
   header {
     display: flex;
