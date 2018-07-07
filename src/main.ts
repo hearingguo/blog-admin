@@ -5,13 +5,14 @@ import App from './layout/App.vue'
 import router from './router/index'
 import store from './store/index'
 
-import * as ElementUi from 'element-ui'
-import '../theme/index.css'
-import './assets/styles/index.less'
+import ElementUi from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+
+import '@/assets/styles/index.less'
 
 Vue.config.productionTip = false
 
-Vue.use(ElementUi)
+Vue.use(ElementUi, { size: 'small', zIndex: 3000 })
 
 /* eslint-disable no-new */
 new Vue({

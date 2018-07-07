@@ -8,7 +8,7 @@
     </div>
     <!-- right -->
     <div class="logout">
-      <el-button type="text">logout</el-button>
+      <el-button type="text">sign out</el-button>
     </div>
   </header>
 </template>
@@ -49,7 +49,7 @@ export default class Header extends Vue {
         align-items: center;
         color: #fff;
         text-decoration: none;
-        font-size: @f-m;
+        font-size: @l-f;
         img {
           border-radius: 50%;
           width: 3rem;

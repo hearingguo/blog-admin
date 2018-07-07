@@ -1,35 +1,33 @@
 <template>
   <el-row class="b-login tc">
-    <el-col :span="8">
-      <el-card class="content">
-        <div class="title">管理员登录</div>
-        <el-form :model="form" ref="form">
-          <el-form-item
-            prop="username"
-            :rules="[
-              { required: true, message: '用户名', trigger: 'blur' },
-              { min: 5, message: '账号至少5位', trigger: 'blur' }
-            ]">
-            <el-input placeholder="管理员账号" v-model="form.username" :maxlength="40"></el-input>
-          </el-form-item>
-          <el-form-item
-            prop="password"
-            :rules="[
-              { required: true, message: '密码', trigger: 'blur' },
-              { min: 6, message: '密码至少6位', trigger: 'blur' }
-            ]">
-            <el-input 
-              placeholder="密码" 
-              v-model="form.password" 
-              :maxlength="40" 
-              type="password"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="submit">Submit</el-button>
-          </el-form-item>
-        </el-form>
-      </el-card>
-    </el-col>
+    <el-card class="content">
+      <div class="title">管理员登录</div>
+      <el-form :model="form" ref="form">
+        <el-form-item
+          prop="username"
+          :rules="[
+            { required: true, message: '用户名', trigger: 'blur' },
+            { min: 5, message: '账号至少5位', trigger: 'blur' }
+          ]">
+          <el-input placeholder="管理员账号" v-model="form.username" :maxlength="40"></el-input>
+        </el-form-item>
+        <el-form-item
+          prop="password"
+          :rules="[
+            { required: true, message: '密码', trigger: 'blur' },
+            { min: 6, message: '密码至少6位', trigger: 'blur' }
+          ]">
+          <el-input 
+            placeholder="密码" 
+            v-model="form.password" 
+            :maxlength="40" 
+            type="password"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="submit">Submit</el-button>
+        </el-form-item>
+      </el-form>
+    </el-card>
   </el-row>
 </template>
 
@@ -103,6 +101,11 @@ export default class Login extends Vue {
       margin-bottom: @xl-l;
     }
   }
+}
+
+.el-card {
+  box-shadow: none;
+  border: 0;
 }
 
 </style>

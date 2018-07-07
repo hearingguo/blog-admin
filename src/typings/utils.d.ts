@@ -12,6 +12,9 @@ interface HTMLElement {
   msRequestFullscreen (): void
 }
 
+
+declare module 'element-ui'
+
 declare module 'nprogress'
 
 declare module '*.jpg'
