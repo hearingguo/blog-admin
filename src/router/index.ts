@@ -17,6 +17,9 @@ import Tags from '@/pages/tags/Tags.vue'
 // comments
 import Comment from '@/pages/comment/Comment.vue' 
 
+// links
+import Links from '@/pages/links/Links.vue'
+
 // info for myself
 import Info from '@/pages/info/Info.vue' 
 
@@ -61,6 +64,15 @@ const routes: RouteConfig[] = [
     meta: { requiresAuth: true, leaves: true, icon: 'icon-comment', show: true },
     children: [
       { path: '/comment', component: Comment, name: '评论' }
+    ]
+  },
+  {
+    path: '/',
+    name: '友情链接',
+    component: index,
+    meta: { requiresAuth: true, leaves: true, icon: 'icon-links', show: true },
+    children: [
+      { path: '/links', component: Links, name: '友情链接' }
     ]
   },
   {

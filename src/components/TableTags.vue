@@ -1,18 +1,18 @@
 <template>
-  <div class="table-tags mt1">
+  <div class="table-tags mt1 clearfix">
     <p class="tags-title mb1 pr1">{{ title }}</p>
     <el-table
       class="tags-content"
       :data="tagsData"
-      border
       style="width: 100%">
       <el-table-column
         type="index"
+        label="编号"
         width="50">
       </el-table-column>
       <el-table-column
         prop="name"
-        label="名称"
+        :label="title === 'tags'?'标签':'分类'"
         width="200">
       </el-table-column>
       <el-table-column
@@ -34,6 +34,12 @@
         </template>
       </el-table-column>
     </el-table>
+
+    <!-- pagination -->
+    <el-pagination class="mt1 fr"
+      layout="total, prev, pager, next"
+      :total="tagsData.length">
+    </el-pagination>
   </div>
 </template>
 

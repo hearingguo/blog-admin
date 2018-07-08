@@ -4,7 +4,7 @@
     <FilterCard/>
 
     <!-- article list -->
-    <div class="article-list">
+    <div class="article-list mt1">
       <!-- ctrol -->
       <el-row class="article-ctrls mb1 tr">
         <el-button type="primary" size="small">发布</el-button>
@@ -14,8 +14,8 @@
       <!-- table -->
       <el-table
         class="article-table"
-        :data="articleList"
         border
+        :data="articleList"
         empty-text="No Data">
         <el-table-column type="expand">
           <template slot-scope="props">
@@ -51,7 +51,8 @@
         </el-table-column>
         <el-table-column
           fixed="right"
-          label="操作">
+          label="操作"
+          width="150">
           <template slot-scope="scope">
             <el-button size="small">
               编辑
@@ -64,10 +65,10 @@
       </el-table>
 
       <!-- pagination -->
-      <el-pagination class="mt1 fr"
-      layout="total, prev, pager, next"
-      :total="articleList.length">
-    </el-pagination>
+      <el-pagination class="tr"
+        layout="total, prev, pager, next"
+        :total="articleList.length">
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -85,20 +86,20 @@ import FilterCard from '@/components/FilterCard.vue'
 export default class Article extends Vue {
 
   private articleList =  [{
-          id: 1,
-          date: '2016-05-03',
-          title: '文章一',
-          class: 'code',
-          tags: ['javascript', 'nodejs'],
-          release: true
-        }, {
-          id: 2,
-          date: '2016-05-02',
-          title: '文章二',
-          class: '生活',
-          tags: ['摄影', '旅游'],
-          release: false
-        }]
+    id: 1,
+    date: '2016-05-03',
+    title: '文章一',
+    class: 'code',
+    tags: ['javascript', 'nodejs'],
+    release: true
+  }, {
+    id: 2,
+    date: '2016-05-02',
+    title: '文章二',
+    class: '生活',
+    tags: ['摄影', '旅游'],
+    release: false
+  }]
 
 
   private showTags (val: string[]) {
@@ -110,10 +111,6 @@ export default class Article extends Vue {
 </script>
 
 <style lang="less" scoped>
-@import '../../assets/styles/vars.less';
-
-.article-list {
-  padding: @xl-l 0 @xxxl-l;
-}
+  @import '../../assets/styles/vars.less';
 
 </style>

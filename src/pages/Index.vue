@@ -1,4 +1,5 @@
 <template>
+<transition name="fade">
     <el-row class="content">
       <!-- header -->
       <Header/>
@@ -22,20 +23,23 @@
           <el-col :span="24" key="2" class="content">
             <transition name="fade" mode="out-in">
               <el-card class="box-card mb1" shadow="never">
-                <router-view></router-view>
+                <transition name="fade" mode="out-in">
+                  <router-view></router-view>
+                </transition>
               </el-card>
             </transition>
           </el-col>
         </el-main>
       </el-container>
     </el-row>
+</transition>
 </template>
 
 <script lang="ts">
 
 import { Component, Vue } from 'vue-property-decorator'
-import Header from '@/components/Header.vue'
-import Sidebar from '@/components/Sidebar.vue'
+import Header from '@/components/common/Header.vue'
+import Sidebar from '@/components/common/Sidebar.vue'
 
 @Component({
   components: {

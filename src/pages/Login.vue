@@ -24,7 +24,7 @@
             type="password"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submit">Submit</el-button>
+          <el-button type="primary" @click="submit" size="small">Submit</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -96,9 +96,10 @@ export default class Login extends Vue {
     width: 100%;
     width: @login-w;
     padding: @xl-l;
-    
+    margin-top: -20%;
     .title{
       margin-bottom: @xl-l;
+      font-size: @l-f;
     }
   }
 }

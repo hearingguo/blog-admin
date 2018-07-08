@@ -3,12 +3,12 @@
     :title="title"
     :visible="visible"
     before-close="handleClose">
-    <el-form ref="formTag" :model="formTag" label-width="40px">
+    <el-form ref="formLinks" :model="formLinks" label-width="40px">
       <el-form-item label="名称">
-        <el-input v-model="formTag.name" placeholder="name of tag/classify..."></el-input>
+        <el-input v-model="formLinks.name" placeholder="name..."></el-input>
       </el-form-item>
-      <el-form-item label="描述">
-        <el-input type="textarea" :rows="4" v-model="formTag.desc" placeholder="description of tag/classify.."></el-input>
+      <el-form-item label="URL">
+        <el-input type="textarea" :rows="4" v-model="formLinks.url" placeholder="url..."></el-input>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -24,7 +24,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 
 interface Form {
   name: string
-  desc: string
+  url: string
 }
 
 @Component
@@ -36,9 +36,9 @@ export default class ModalTag extends Vue {
   @Prop()
   private visible: boolean
 
-  private formTag: Form = {
+  private formLinks: Form = {
     name: '',
-    desc: ''
+    url: ''
   }
 
   private handleClose () {

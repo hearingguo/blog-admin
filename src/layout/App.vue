@@ -1,5 +1,7 @@
 <template>
-  <router-view/>
+  <transition name="fade">
+    <router-view/>
+  </transition>
 </template>
 
 <script lang="ts">
@@ -7,6 +9,10 @@ import { Component, Vue } from 'vue-property-decorator'
 
 @Component
 export default class Admin extends Vue {
+
+  private beforeCreate () {
+    // initAuth
+  }
   
 }
 </script>

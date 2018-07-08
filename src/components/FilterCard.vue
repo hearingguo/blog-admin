@@ -1,6 +1,6 @@
 <template>
   <div class="filter-card">
-    <el-form ref="form" :model="articleForm" label-width="80px">
+    <el-form ref="form" :model="articleForm" label-width="40px">
       <!-- tags -->
       <el-form-item label="分类">
         <el-radio-group v-model="articleForm.classify" size="small">
@@ -33,7 +33,7 @@
       <!-- 搜索 -->
       <el-form-item label="搜索">
         <el-col :span="5">
-          <el-input v-model="articleForm.search" size="small" placeholder="搜索" ></el-input>
+          <el-input v-model="articleForm.search" size="small" placeholder="search..."></el-input>
         </el-col>
         <el-button class="ml1" type="primary" size="small" icon="el-icon-search" >查询</el-button>
       </el-form-item>
@@ -119,20 +119,5 @@ export default class FilterCard extends Vue {
 
 <style lang="less" scoped>
 @import '../assets/styles/vars.less';
-
-.filter-card {
-  .el-radio-group, .el-checkbox-group {
-    > label {
-      margin: 0 @s-l;
-    }
-  }
-
-  .el-form-item {
-    border-bottom: 1px dashed @border;
-    margin: 0;
-    padding: @s-l 0;
-  }
-  
-}
 
 </style>

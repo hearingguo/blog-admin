@@ -22,8 +22,63 @@
       border-radius: @xs-br;
     }
   }
+
+  .el-radio-group, .el-checkbox-group {
+    > label {
+      margin-right: @s-l;
+    }
+  }
+
+  .el-form-item {
+    border-bottom: 1px dashed @border;
+    margin: 0;
+    padding: @s-l 0;
+    &:nth-of-type(1) {
+      padding-top: 0;
+    }
+  }
+
 }
 
-.el-form-item {
-  margin-bottom: 1rem;
+
+// avatar uploader
+.img-uploader {
+  .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    &:hover {
+      border-color: #409EFF;
+    }
+  }
+  .el-icon-plus {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  ._img {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
+}
+
+
+
+// pagination
+.el-pagination {
+  margin-top: @m-l;
+}
+
+
+// form 
+.el-form {
+  .el-form-item:nth-last-of-type(1) {
+    margin-bottom: 0;
+  }
 }
