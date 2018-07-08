@@ -5,20 +5,12 @@
       <Header/>
 
       <el-container>
-
         <!-- sidebar -->
         <Sidebar/>
-        
         <!-- main -->
         <el-main>
           <!-- breadcrumb -->
-          <el-col :span="24" key="1">
-            <el-breadcrumb separator="/" class="breadcrumb">
-              <el-breadcrumb-item>文章管理</el-breadcrumb-item>
-              <el-breadcrumb-item>文章列表</el-breadcrumb-item>
-            </el-breadcrumb>
-          </el-col>
-
+          <Breadcrumb />
           <!-- content -->
           <el-col :span="24" key="2" class="content">
             <transition name="fade" mode="out-in">
@@ -37,18 +29,21 @@
 
 <script lang="ts">
 
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
+import { Route } from 'vue-router'
 import Header from '@/components/common/Header.vue'
 import Sidebar from '@/components/common/Sidebar.vue'
+import Breadcrumb from '@/components/common/Breadcrumb.vue'
 
 @Component({
   components: {
     Header,
-    Sidebar
+    Sidebar,
+    Breadcrumb
   }
 })
 export default class Home extends Vue {
-  
+
 }
 
 </script>

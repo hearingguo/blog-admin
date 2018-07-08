@@ -25,6 +25,7 @@ export default class Header extends Vue {
 </script>
 
 <style lang="less" scoped>
+
   @import '../../assets/styles/vars.less';
 
   header {

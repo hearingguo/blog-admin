@@ -5,11 +5,14 @@ import 'nprogress/nprogress.css'
 
 // login
 import login from '@/pages/Login.vue'
-import index from '@/pages/Index.vue'
+
+// home
+import Home from '@/pages/home/Home.vue'
+import Index from '@/pages/Index.vue'
 
 // article manage
-import article from '@/pages/article/Article.vue'
-import release from '@/pages/article/Release.vue'
+import Article from '@/pages/article/Article.vue'
+import Release from '@/pages/article/Release.vue'
 
 // tag manage
 import Tags from '@/pages/tags/Tags.vue' 
@@ -27,31 +30,34 @@ Vue.use(Router)
 
 const routes: RouteConfig[] = [
   {
-    path: '/',
+    path: '/login',
     name: 'login',
     component: login,
     meta: { leaves: true, show: false }
   },
   {
     path: '/home',
-    name: 'home',
-    component: index,
-    meta: { requiresAuth: true, leaves: true, show: false }
+    name: '首页',
+    component: Index,
+    meta: { requiresAuth: true, leaves: true, icon: 'icon-home', show: true },
+    children: [
+      { path: '/home', component: Home, name: '首页' }
+    ]
   },
   {
     path: '/',
     name: '文章管理',
-    component: index,
+    component: Index,
     meta: { requiresAuth: true, leaves: false, icon: 'icon-article',  show: true },
     children: [
-      { path: '/article/index', component: article, name: '文章列表', meta: { icon: 'icon-list'}},
-      { path: '/article/release', component: release, name: '文章发布', meta: { icon: 'icon-release'}}
+      { path: '/article/index', component: Article, name: '文章列表', meta: { icon: 'icon-list'} },
+      { path: '/article/release', component: Release, name: '文章发布', meta: { icon: 'icon-release'} }
     ]
   },
   {
     path: '/',
     name: '文章标签',
-    component: index,
+    component: Index,
     meta: { requiresAuth: true, leaves: true, icon: 'icon-tags', show: true },
     children: [
       { path: '/tags', component: Tags, name: '文章标签' }
@@ -60,7 +66,7 @@ const routes: RouteConfig[] = [
   {
     path: '/',
     name: '评论',
-    component: index,
+    component: Index,
     meta: { requiresAuth: true, leaves: true, icon: 'icon-comment', show: true },
     children: [
       { path: '/comment', component: Comment, name: '评论' }
@@ -69,7 +75,7 @@ const routes: RouteConfig[] = [
   {
     path: '/',
     name: '友情链接',
-    component: index,
+    component: Index,
     meta: { requiresAuth: true, leaves: true, icon: 'icon-links', show: true },
     children: [
       { path: '/links', component: Links, name: '友情链接' }
@@ -78,7 +84,7 @@ const routes: RouteConfig[] = [
   {
     path: '/',
     name: '信息管理',
-    component: index,
+    component: Index,
     meta: { requiresAuth: true, leaves: true, icon: 'icon-setting', show: true },
     children: [
       { path: '/info', component: Info, name: '信息管理' }
