@@ -36,12 +36,12 @@ const routes: RouteConfig[] = [
     meta: { leaves: true, show: false }
   },
   {
-    path: '/home',
+    path: '/',
     name: '首页',
     component: Index,
     meta: { requiresAuth: true, leaves: true, icon: 'icon-home', show: true },
     children: [
-      { path: '/home', component: Home, name: '首页' }
+      { path: '/', component: Home, name: '首页' }
     ]
   },
   {
