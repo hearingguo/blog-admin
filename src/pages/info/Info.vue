@@ -1,7 +1,7 @@
 <template>
   <div class="info">
     <!-- blog基本信息 -->
-    <div class="base-info">
+    <div class="website-info">
       <div class="title">基本信息</div>
       <el-form ref="baseInfos" :model="baseInfos" label-position="left" size="small" label-width="70px">
         <el-form-item label="标题">
@@ -50,25 +50,25 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="用户名">
-          <el-input :disabled="true" placeholder="username..."></el-input>
+          <el-input :disabled="true" v-model="authorInfos.username" placeholder="username..."></el-input>
         </el-form-item>
         <el-form-item label="昵称">
-          <el-input v-model="authorInfos.name" placeholder="name..."></el-input>
+          <el-input v-model="authorInfos.nickname" placeholder="name..."></el-input>
         </el-form-item>
         <el-form-item label="个性签名">
           <el-input v-model="authorInfos.signature" placeholder="signature..."></el-input>
         </el-form-item>
         <el-form-item label="原密码">
-          <el-input type="password" v-model="authorInfos.password" placeholder="old password..."></el-input>
+          <el-input type="password" v-model="authorInfos.oldPassword" placeholder="old password..."></el-input>
         </el-form-item>
         <el-form-item label="新密码">
-          <el-input type="password" v-model="authorInfos.passwordnew" placeholder="new password..."></el-input>
+          <el-input type="password" v-model="authorInfos.newPassword" placeholder="new password..."></el-input>
         </el-form-item>
         <el-form-item label="确认密码">
-          <el-input type="password" v-model="authorInfos.passwordnew" placeholder="new password again..."></el-input>
+          <el-input type="password" v-model="authorInfos.newPassword" placeholder="new password again..."></el-input>
         </el-form-item>
         <el-form-item label="">
-          <el-button type="primary" size="small">保存</el-button>
+          <el-button type="primary" size="small" @click="submitAuthInfos()" :loading="submitLoading">保存</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -79,29 +79,10 @@
 
 import { Component, Vue } from 'vue-property-decorator'
 
-interface FormBase {
-  title: string
-  subTitle: string
-  keywords: string
-  url: string
-  desc: string
-  email: string
-  icp: string
-}
-
-interface FormAuthor {
-  avatar: string
-  name: string
-  signature: string
-  password: string
-  passwordnew: string
-  author?: string
-}
-
 @Component
 export default class Info extends Vue {
 
-  private baseInfos:FormBase = {
+  private baseInfos: IWebsite = {
     title: '',
     subTitle: '',
     keywords: '',
@@ -111,12 +92,21 @@ export default class Info extends Vue {
     icp: ''
   }
 
-  private authorInfos:FormAuthor = {
-    avatar: '',
-    name: '',
-    signature: '',
-    password: '',
-    passwordnew: ''
+  private get loading() {
+    return this.$store.state.auth.loading
+  }
+
+  private get submitLoading() {
+    return this.$store.state.auth.submitLoading
+  }
+
+  private get authorInfos () {
+    const authInfo = this.$store.state.auth.info
+    return { ...authInfo, oldPassword: '', newPassword: ''}
+  }
+
+  private submitAuthInfos() {
+    this.$store.dispatch('auth/putAuth', this.authorInfos)
   }
 
   private handleSuccess(res: any, file: any) {
@@ -135,6 +125,10 @@ export default class Info extends Vue {
     }
     return isJPG && isLt2M
   }
+
+  private beforeCreate() {
+    this.$store.dispatch('auth/getAuth')
+  }
 }
 
 </script>
@@ -152,7 +146,7 @@ export default class Info extends Vue {
     }
     > div {
       flex-grow: 1;
-      &.base-info {
+      &.website-info {
         flex-grow: 4;
         border-right: 1px dashed @border;
         margin-right: @xl-l;

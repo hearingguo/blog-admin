@@ -6,7 +6,7 @@ declare namespace Ajax {
   }
 
   // 请求接口数据
-  export interface AjaxResponse {
+  export interface AjaxResponse<T = any> {
 
     /**
      * 状态
@@ -21,15 +21,17 @@ declare namespace Ajax {
     code: number,
 
     /**
-     * 数据
-     * @type { any }
-     */
-    result: any,
-
-    /**
      * 消息
      * @type { string }
      */
     message: string
+
+
+    /**
+     * 数据
+     * @type { any }
+     */
+    result: T
   }
+
 }
