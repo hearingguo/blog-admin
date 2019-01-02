@@ -3,34 +3,34 @@
     <!-- blog基本信息 -->
     <div class="website-info">
       <div class="title">基本信息</div>
-      <el-form ref="baseInfos" :model="baseInfos" label-position="left" size="small" label-width="70px">
+      <el-form ref="OptionInfos" :model="OptionInfos" label-position="left" size="small" label-width="70px">
         <el-form-item label="标题">
           <el-col :span="12">
-            <el-input v-model="baseInfos.title" placeholder="title..."></el-input>
+            <el-input v-model="OptionInfos.title" placeholder="title..."></el-input>
           </el-col>
         </el-form-item>
         <el-form-item label="副标题">
           <el-col :span="12">
-            <el-input v-model="baseInfos.subTitle" placeholder="subtitle..."></el-input>
+            <el-input v-model="OptionInfos.subtitle" placeholder="subtitle..."></el-input>
           </el-col>
         </el-form-item>
         <el-form-item label="关键词">
-          <el-input v-model="baseInfos.keywords" placeholder="keywords..."></el-input>
+          <el-input v-model="OptionInfos.keywords" placeholder="keywords..."></el-input>
         </el-form-item>
         <el-form-item label="站点URL">
-          <el-input v-model="baseInfos.url" placeholder="URl..."></el-input>
+          <el-input v-model="OptionInfos.url" placeholder="URl..."></el-input>
         </el-form-item>
         <el-form-item label="站点描述">
-          <el-input type="textarea" rows="4" v-model="baseInfos.desc" placeholder="description..."></el-input>
+          <el-input type="textarea" rows="4" v-model="OptionInfos.desc" placeholder="description..."></el-input>
         </el-form-item>
         <el-form-item label="电子邮件">
-          <el-input v-model="baseInfos.email" placeholder="email..."></el-input>
+          <el-input v-model="OptionInfos.email" placeholder="email..."></el-input>
         </el-form-item>
         <el-form-item label="ICP">
-          <el-input v-model="baseInfos.icp" placeholder="ICP..."></el-input>
+          <el-input v-model="OptionInfos.icp" placeholder="ICP..."></el-input>
         </el-form-item>
         <el-form-item label="">
-          <el-button type="primary" size="small">保存</el-button>
+          <el-button type="primary" size="small" @click="submitOptionInfos()" :loading="submitOptionLoading">保存</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -68,7 +68,7 @@
           <el-input type="password" v-model="authorInfos.newPassword" placeholder="new password again..."></el-input>
         </el-form-item>
         <el-form-item label="">
-          <el-button type="primary" size="small" @click="submitAuthInfos()" :loading="submitLoading">保存</el-button>
+          <el-button type="primary" size="small" @click="submitAuthInfos()" :loading="submitAuthLoading">保存</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -82,22 +82,24 @@ import { Component, Vue } from 'vue-property-decorator'
 @Component
 export default class Info extends Vue {
 
-  private baseInfos: IWebsite = {
-    title: '',
-    subTitle: '',
-    keywords: '',
-    url: '',
-    desc: '',
-    email: '',
-    icp: ''
-  }
-
-  private get loading() {
+  private get authLoading() {
     return this.$store.state.auth.loading
   }
 
-  private get submitLoading() {
+  private get optionLoading() {
+    return this.$store.state.option.loading
+  }
+
+  private get submitAuthLoading() {
     return this.$store.state.auth.submitLoading
+  }
+
+  private get submitOptionLoading() {
+    return this.$store.state.option.submitLoading
+  }
+
+  private get OptionInfos () {
+    return this.$store.state.option.info
   }
 
   private get authorInfos () {
@@ -107,6 +109,10 @@ export default class Info extends Vue {
 
   private submitAuthInfos() {
     this.$store.dispatch('auth/putAuth', this.authorInfos)
+  }
+
+  private submitOptionInfos() {
+    this.$store.dispatch('option/putOption', this.OptionInfos)
   }
 
   private handleSuccess(res: any, file: any) {
@@ -128,6 +134,7 @@ export default class Info extends Vue {
 
   private beforeCreate() {
     this.$store.dispatch('auth/getAuth')
+    this.$store.dispatch('option/getOption')
   }
 }
 
