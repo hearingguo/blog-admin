@@ -11,14 +11,25 @@ import { respSuccess } from '@/utils/response';
 export interface ILinkInfo {
   loading: boolean;
   submitLoading: boolean;
-  info: ILinkItem[];
+  info: {
+    list: ILinkItem[],
+    pagination: IPagination
+  };
   currentRes: Ajax.AjaxResponse
 }
 
 const state: ILinkInfo = {
   loading: false,
   submitLoading: false,
-  info:[],
+  info: {
+    list: [],
+    pagination: {
+      cPage: 1,
+      sPage: 10,
+      tPage: 1,
+      total: 1
+    }
+  },
   currentRes: {
     success: false,
     code: 0,

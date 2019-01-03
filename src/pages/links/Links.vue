@@ -17,11 +17,11 @@
       </el-table-column>
       <el-table-column
         prop="username"
-        label="名称"
+        label="友情人"
         width="180">
       </el-table-column>
       <el-table-column
-        label="URL">
+        label="友情地址">
         <template slot-scope="scope">
           <a :href="scope.row.url">{{ scope.row.url }}</a>
         </template>
@@ -38,7 +38,7 @@
             <p>{{ `确认删除关于${scope.row.username}的友情链接么？` }}</p>
             <div style="text-align: right; margin: 10px 0 0;">
               <el-button size="mini" type="text" @click="scope.row.isVisiblePop = false">取消</el-button>
-              <el-button type="danger" plain size="mini" @click="handleDeleteLink(scope.row._id)" >确定</el-button>
+              <el-button type="danger" plain size="mini" @click="handleDeleteLink(scope.row._id); scope.row.isVisiblePop = false">确定</el-button>
             </div>
             <el-button type="danger" slot="reference" plain size="small" @click="scope.row.isVisiblePop = true">删除</el-button>
           </el-popover>
@@ -77,21 +77,20 @@ export default class Links extends Vue {
 
   private ctrlName: string = 'post'
 
-  private o_id: string = 'old_id'
-  private c_id: string = 'current_id'
-
   private formLink: ILinkItem = {
     username: '',
     url: ''
   }
 
   private get links () {
-    return this.$store.state.link.info.map((item: ILinkItem) => ({...item, isVisiblePop: false }))
-  }
+    const info = this.$store.state.link.info
+    const list = info.list.map((item: ILinkItem) => ({...item, isVisiblePop: false }))
 
-  // private get isVisiblePop() {
-  //   return this.c_id === this.o_id
-  // }
+    return {
+      list,
+      pagination: info.info
+    }
+  }
 
   private handleChangeLink (link: ILinkItem) {
     this.visible = true
@@ -100,16 +99,9 @@ export default class Links extends Vue {
     this.formLink = { _id, username, url }
   }
 
-  private handleDeleteLink (id: string, isDel?: boolean) {
-    if (typeof isDel === undefined) {
-      this.o_id = id
-      this.c_id = id
-    } else {
-      if (isDel) { // delete
-        this.$store.dispatch('link/deleteLink', id)
-      }
-      this.c_id = ''
-    }
+  private async handleDeleteLink (id: string) {
+    await this.$store.dispatch('link/deleteLink', id)
+    this.$store.dispatch('link/getLinks')
   }
 
   private beforeCreate () {
