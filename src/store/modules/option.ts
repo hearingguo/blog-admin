@@ -34,7 +34,7 @@ const actions: ActionTree<IOptionInfo, any> = {
     { commit }
   ) {
     commit('FETCH_DATA')
-    const res = await options.getOption()
+    const res = await options.getOption<IOption>()
     commit('RECEIVE_OPTION', res)
   },
 
@@ -44,7 +44,7 @@ const actions: ActionTree<IOptionInfo, any> = {
     params: IOption
   ) {
     commit('FETCH_DATA_WAITTING')
-    const res = await options.putOption(params)
+    const res = await options.putOption<IOption>(params)
     commit('RECEIVE_OPTION', res)
   }
 

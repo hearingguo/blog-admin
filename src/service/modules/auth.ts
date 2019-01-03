@@ -1,7 +1,7 @@
 import { ax } from '../axios'
 
 // get auth information
-export function signin<T = IAuth> (
+export function signin<T = undefined> (
   params: ISignParams
 ): Promise<Ajax.AjaxResponse<T>> {
   return ax.post<Ajax.AjaxResponse<T>>('/signin', params)
@@ -9,13 +9,13 @@ export function signin<T = IAuth> (
 }
 
 // get auth information
-export function getAuth<T = IAuth> (): Promise<Ajax.AjaxResponse<T>> {
+export function getAuth<T = undefined> (): Promise<Ajax.AjaxResponse<T>> {
   return ax.get<Ajax.AjaxResponse<T>>('/auth')
           .then(res => res.data)
 }
 
 // change auth information
-export function putAuth<T = IAuth> (
+export function putAuth<T = undefined> (
   params: IAuthParams
 ): Promise<Ajax.AjaxResponse<T>> {
   return ax.put<Ajax.AjaxResponse<T>>('/auth', params)

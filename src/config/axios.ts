@@ -3,6 +3,7 @@ import { AxiosResponse, AxiosRequestConfig } from 'axios';
 import * as api from '@/config/api';
 
 import { respError } from '@/utils/response';
+import querystring from 'querystring';
 
 // axios config
 export const config: AxiosRequestConfig = {
@@ -30,14 +31,14 @@ export const config: AxiosRequestConfig = {
 
 // request
 export function request (config: AxiosRequestConfig) {
-  // if (
-  //   config.method === 'post' ||
-  //   config.method === 'put' ||
-  //   config.method === 'delete' ||
-  //   config.method === 'patch'
-  // ) {
-  //   config.data = querystring.stringify(config.data)
-  // }
+  if (
+    config.method === 'post' ||
+    config.method === 'put' ||
+    config.method === 'delete' ||
+    config.method === 'patch'
+  ) {
+    config.data = querystring.stringify(config.data)
+  }
   return config;
 }
 
@@ -51,6 +52,10 @@ export function requestFail (error: Error) {
 
 // response
 export function response (response: AxiosResponse<Ajax.AjaxResponse>) {
+  const { code, message } = response.data
+  if (!code) {
+    respError(message);
+  }
   return response;
 }
 

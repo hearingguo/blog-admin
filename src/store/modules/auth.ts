@@ -32,7 +32,7 @@ const actions: ActionTree<IAuthInfo, any> = {
     params: ISignParams
   ) {
     commit('FETCH_DATA_WAITTING')
-    const res = await auths.signin(params)
+    const res = await auths.signin<IAuth>(params)
     commit('SIGN_SUCCESS', res)
   },
 
@@ -41,7 +41,7 @@ const actions: ActionTree<IAuthInfo, any> = {
     { commit }
   ) {
     commit('FETCH_DATA')
-    const res = await auths.getAuth()
+    const res = await auths.getAuth<IAuth>()
     commit('RECEIVE_AUTH', res)
   },
 
@@ -51,7 +51,7 @@ const actions: ActionTree<IAuthInfo, any> = {
     params: IAuthParams
   ) {
     commit('FETCH_DATA_WAITTING')
-    const res = await auths.putAuth(params)
+    const res = await auths.putAuth<IAuth>(params)
     commit('RECEIVE_AUTH', res)
   }
 

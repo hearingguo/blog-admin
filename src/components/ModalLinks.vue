@@ -3,17 +3,17 @@
     :title="title"
     :visible="visible"
     before-close="handleClose">
-    <el-form ref="formLinks" :model="formLinks" label-width="40px">
+    <el-form ref="formLink" :model="formLink" label-width="40px">
       <el-form-item label="名称">
-        <el-input v-model="formLinks.name" placeholder="name..."></el-input>
+        <el-input v-model="formLink.username" placeholder="username..."></el-input>
       </el-form-item>
       <el-form-item label="URL">
-        <el-input type="textarea" :rows="4" v-model="formLinks.url" placeholder="url..."></el-input>
+        <el-input type="textarea" :rows="4" v-model="formLink.url" placeholder="url..."></el-input>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="handleClose">取 消</el-button>
-      <el-button type="primary" @click="submit">确 定</el-button>
+      <el-button type="primary" @click="handleAddLink">确 定</el-button>
     </span>
   </el-dialog>
 </template>
@@ -21,11 +21,6 @@
 <script lang="ts">
 
 import { Component, Vue, Prop } from 'vue-property-decorator'
-
-interface Form {
-  name: string
-  url: string
-}
 
 @Component
 export default class ModalTag extends Vue {
@@ -36,24 +31,33 @@ export default class ModalTag extends Vue {
   @Prop()
   private visible: boolean
 
-  private formLinks: Form = {
-    name: '',
-    url: ''
+  @Prop()
+  private formLink: ILinkItem
+
+  @Prop()
+  private ctrlName: string
+
+  private get currentRes() {
+    return this.$store.state.link.currentRes
   }
 
   private handleClose () {
     this.$emit('update:visible', false)
   }
 
-  private submit () {
-    this.handleClose()
-
+  private async handleAddLink (data: ILinkItem) {
+    if (this.ctrlName === 'put') {
+      await this.$store.dispatch('link/putLink', this.formLink)
+    } else {
+      await this.$store.dispatch('link/postLink', this.formLink)
+    }
+    
+    if(this.currentRes.code) {
+      this.handleClose()
+      this.$store.dispatch('link/getLinks')
+      this.$emit('update:formLink', { username: '', url: '' })
+    }
   }
   
 }
-
 </script>
-
-<style lang="less" scoped>
-
-</style>
