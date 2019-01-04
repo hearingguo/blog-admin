@@ -1,24 +1,24 @@
 /**
  * 
- * Link Store
+ * Classify Store
  * 
  */
 
 import { ActionTree, MutationTree } from 'vuex'
-import { links } from '@/service/index'
+import { classifys } from '@/service/index'
 import { respSuccess } from '@/utils/response';
 
-export interface ILinkInfo {
+export interface IClassifyInfo {
   loading: boolean;
   submitLoading: boolean;
   info: {
-    list: ILinkItem[],
+    list: IClassifyItem[],
     pagination: IPagination
   };
   currentRes: Ajax.AjaxResponse
 }
 
-const state: ILinkInfo = {
+const state: IClassifyInfo = {
   loading: false,
   submitLoading: false,
   info: {
@@ -38,58 +38,58 @@ const state: ILinkInfo = {
   }
 }
 
-const actions: ActionTree<ILinkInfo, any> = {
+const actions: ActionTree<IClassifyInfo, any> = {
 
   // get links
-  async getLinks (
+  async getClassifys (
     { commit },
     params?: IQuerys
   ) {
     commit('FETCH_DATA')
-    const res = await links.getLinks<ILinkItem[]>(params)
-    if (res.code) commit('RECEIVE_LINKS', res)
+    const res = await classifys.getClassifys<IClassifyItem[]>(params)
+    if (res.code) commit('RECEIVE_CLASSIFYS', res)
   },
 
   // change link
-  async putLink(
+  async putClassify(
     { commit },
-    params: ILinkItem
+    params: IClassifyItem
   ) {
     commit('FETCH_DATA_WAITTING')
-    const res = await links.putLink<ILinkItem>(params)
+    const res = await classifys.putClassify<IClassifyItem>(params)
     if (res.code) commit('FETCH_DATA_SUCCESS', res)
   },
 
   // add link
-  async postLink (
+  async postClassify (
     { commit },
-    params: ILinkItem
+    params: IClassifyItem
   ) {
     commit('FETCH_DATA_WAITTING')
-    const res = await links.postLink<ILinkItem>(params)
+    const res = await classifys.postClassify<IClassifyItem>(params)
     if (res.code) commit('FETCH_DATA_SUCCESS', res)
   },
 
   //delete link
-  async deleteLink (
+  async deleteClassify (
     { commit },
     id: string
   ) {
     commit('FETCH_DATA_WAITTING')
-    const res = await links.deleteLink(id)
+    const res = await classifys.deleteClassify(id)
     if (res.code) commit('FETCH_DATA_SUCCESS', res)
   }
 
 }
 
-const mutations: MutationTree<ILinkInfo> = {
+const mutations: MutationTree<IClassifyInfo> = {
   'FETCH_DATA'(
-    state: ILinkInfo
+    state: IClassifyInfo
   ) {
     state.loading = true
   },
   'FETCH_DATA_SUCCESS'(
-    state: ILinkInfo,
+    state: IClassifyInfo,
     res: Ajax.AjaxResponse
   ) {
     state.loading = false
@@ -97,12 +97,12 @@ const mutations: MutationTree<ILinkInfo> = {
     respSuccess(res.message)
   },
   'FETCH_DATA_WAITTING'(
-    state: ILinkInfo
+    state: IClassifyInfo
   ) {
     state.submitLoading = true
   },
-  'RECEIVE_LINKS'(
-    state: ILinkInfo,
+  'RECEIVE_CLASSIFYS'(
+    state: IClassifyInfo,
     data: Ajax.AjaxResponse
   ) {
     state.loading = false
@@ -111,7 +111,7 @@ const mutations: MutationTree<ILinkInfo> = {
   }
 }
 
-export const link =  {
+export const classify =  {
   namespaced: true,
   state,
   actions,

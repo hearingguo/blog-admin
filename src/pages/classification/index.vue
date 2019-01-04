@@ -2,19 +2,20 @@
   <div class="tags">
 
     <div class="tags-ctrl pb1 clearfix">
-      <el-button type="primary" @click="addTag('添加标签')" icon="el-icon-plus" size="small">添加标签</el-button>
+      <el-button type="primary" @click="visible = true" icon="el-icon-plus" size="small">添加分类</el-button>
       <el-input class="search fr" type="search" suffix-icon="el-icon-search" size="small" placeholder="search"></el-input>
     </div>
 
     <!-- modal -->
     <ModalTag 
-      :title="title"
+      title="添加分类"
+      :formTag.sync="formTag"
       :visible.sync="visible"/>
-
-    <!-- 标签list -->
+    
+    <!-- 分类list -->
     <TableTags 
-      title="tag"
-      :tagsData="tags" />
+      title="classify"
+      :tagsData="classifyInfo" />
 
   </div>
 </template>
@@ -37,35 +38,17 @@ export default class Tags extends Vue {
 
   private title: string = ''
 
-  private classifies = [
-    {
-      name: 'high coding',
-      desc: 'coding相关',
-      article: 10
-    },
-    {
-      name: 'high reading',
-      desc: 'reading相关',
-      article: 10
-    },
-    {
-      name: 'high living',
-      desc: 'living相关',
-      article: 10
-    }
-  ]
+  private formTag: IClassifyItem = {
+    title: '',
+    description: ''
+  }
 
-  private tags = [
-    {
-      name: 'javascript',
-      desc: 'javascript相关',
-      article: 10
-    }
-  ]
+  private get classifyInfo () {
+    return this.$store.state.classify.info
+  }
 
-  private addTag (title: string) {
-    this.visible = true
-    this.title = title
+  private beforeCreate() {
+    this.$store.dispatch('classify/getClassifys')
   }
 
 }

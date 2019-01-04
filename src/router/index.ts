@@ -17,6 +17,9 @@ import Release from '@/pages/article/Release.vue'
 // tag manage
 import Tags from '@/pages/tags/Tags.vue' 
 
+// classification manage
+import Classification from '@/pages/classification/index.vue' 
+
 // comments
 import Comment from '@/pages/comment/Comment.vue' 
 
@@ -56,6 +59,15 @@ const routes: RouteConfig[] = [
   },
   {
     path: '/',
+    name: '文章分类',
+    component: Index,
+    meta: { requiresAuth: true, leaves: true, icon: 'icon-classification', show: true },
+    children: [
+      { path: '/classification', component: Classification, name: '文章分类' }
+    ]
+  },
+  {
+    path: '/',
     name: '文章标签',
     component: Index,
     meta: { requiresAuth: true, leaves: true, icon: 'icon-tags', show: true },
@@ -65,7 +77,7 @@ const routes: RouteConfig[] = [
   },
   {
     path: '/',
-    name: '评论',
+    name: '关于评论',
     component: Index,
     meta: { requiresAuth: true, leaves: true, icon: 'icon-comment', show: true },
     children: [
