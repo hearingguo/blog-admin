@@ -31,14 +31,14 @@ export const config: AxiosRequestConfig = {
 
 // request
 export function request (config: AxiosRequestConfig) {
-  if (
-    config.method === 'post' ||
-    config.method === 'put' ||
-    config.method === 'delete' ||
-    config.method === 'patch'
-  ) {
-    config.data = querystring.stringify(config.data)
-  }
+  // if (
+  //   config.method === 'post' ||
+  //   config.method === 'put' ||
+  //   config.method === 'delete' ||
+  //   config.method === 'patch'
+  // ) {
+  //   config.data = querystring.stringify(config.data)
+  // }
   return config;
 }
 

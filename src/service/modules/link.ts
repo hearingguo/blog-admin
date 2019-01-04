@@ -1,8 +1,11 @@
 import { ax } from '../axios'
 
 // get links 
-export function getLinks<T = undefined> (): Promise<Ajax.AjaxResponse<T>> {
-  return ax.get<Ajax.AjaxResponse<T>>('/link')
+export function getLinks<T = undefined> (
+  params?: IQuerys
+): Promise<Ajax.AjaxResponse<T>> {
+  const querys = params?params:{}
+  return ax.get<Ajax.AjaxResponse<T>>('/link', { params: querys })
           .then(res => res.data)
 }
 

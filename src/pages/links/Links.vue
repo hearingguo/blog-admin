@@ -3,7 +3,7 @@
 
     <div class="links-ctrl pb1 clearfix">
       <el-button type="primary" @click="visible = true" icon="el-icon-plus" size="small">添加友链</el-button>
-      <el-input class="search fr" type="search" suffix-icon="el-icon-search" size="small" placeholder="search..."></el-input>
+      <el-input class="search fr" type="search" suffix-icon="el-icon-search" size="small" placeholder="search..." v-model="keywords" @keyup.enter.native="onSearch"></el-input>
     </div>
 
     <el-table
@@ -75,6 +75,8 @@ export default class Links extends Vue {
 
   private visible: boolean = false
 
+  private keywords: string = ''
+
   private ctrlName: string = 'post'
 
   private formLink: ILinkItem = {
@@ -102,6 +104,12 @@ export default class Links extends Vue {
   private async handleDeleteLink (id: string) {
     await this.$store.dispatch('link/deleteLink', id)
     this.$store.dispatch('link/getLinks')
+  }
+
+  private onSearch() {
+    this.$store.dispatch('link/getLinks', {
+      keyword: this.keywords
+    })
   }
 
   private beforeCreate () {

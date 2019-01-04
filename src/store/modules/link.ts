@@ -42,10 +42,11 @@ const actions: ActionTree<ILinkInfo, ILinkInfo> = {
 
   // get links
   async getLinks (
-    { commit }
+    { commit },
+    params?: IQuerys
   ) {
     commit('FETCH_DATA')
-    const res = await links.getLinks<ILinkItem[]>()
+    const res = await links.getLinks<ILinkItem[]>(params)
     if (res.code) commit('RECEIVE_LINKS', res)
   },
 
