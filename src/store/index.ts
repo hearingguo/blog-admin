@@ -5,6 +5,7 @@ import { option } from './modules/option'
 import { link } from './modules/link'
 import { tag } from './modules/tag'
 import { classify } from './modules/classify'
+import { article } from './modules/article'
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     option,
     link,
     tag,
-    classify
+    classify,
+    article
   }
 })

@@ -16,20 +16,19 @@
         <el-form-item class="filter-card" label="文章标签">
           <el-checkbox-group v-model="article.tag" size="small">
             <el-checkbox-button
-              v-for="(item, index) in articleTags"
-              :label="item.id"
-              :key="index"
-              v-if="item.id">{{ item.value }}</el-checkbox-button>
+              v-for="(item, index) in articleTags.list"
+              :label="item._id"
+              :key="index">{{ item.title }}</el-checkbox-button>
           </el-checkbox-group>
         </el-form-item>
         <el-form-item label="文章描述">
           <el-input rows="4" type="textarea" v-model="article.desc" placeholder="description"></el-input>
         </el-form-item>
         <el-form-item label="文章内容">
-          <MarkdownEditor></MarkdownEditor>
+          <MarkdownEditor />
         </el-form-item>
         <el-form-item label="">
-          <el-button type="primary" size="small">保存</el-button>
+          <el-button type="primary" size="small" @click="handleSaveArticle()">保存</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -40,20 +39,19 @@
           <el-form-item label="文章分类">
             <el-radio-group v-model="article.classify" size="small">
               <el-radio-button
-                v-for="(item, index) in articleClassifies"
-                :label="item.id"
-                :key="index"
-                v-if="item.id">{{ item.value }}</el-radio-button>
+                v-for="(item, index) in articleClassifies.list"
+                :label="item._id"
+                :key="index">{{ item.title }}</el-radio-button>
             </el-radio-group>
           </el-form-item>
           <el-form-item label="文章状态">
-            <el-radio-group v-model="article.release" size="small">
+            <el-radio-group v-model="article.state" size="small">
               <el-radio-button label="1">发布</el-radio-button>
               <el-radio-button label="2">草稿</el-radio-button>
             </el-radio-group>
           </el-form-item>
           <el-form-item label="文章状态">
-            <el-radio-group v-model="article.status" size="small">
+            <el-radio-group v-model="article.publish" size="small">
               <el-radio-button label="1">公开</el-radio-button>
               <el-radio-button label="2">私密</el-radio-button>
             </el-radio-group>
@@ -65,7 +63,7 @@
               :show-file-list="false"
               :on-success="handleSuccess"
               :before-upload="beforeUpload">
-              <img v-if="article.cover" :src="article.cover" class="_img">
+              <img v-if="article.thumb" :src="article.thumb" class="_img">
               <i v-else class="el-icon-plus"></i>
             </el-upload>
           </el-form-item>
@@ -88,62 +86,32 @@ import MarkdownEditor from '@/components/common/MdEditor.vue'
 })
 export default class Release extends Vue {
 
-  private articleClassifies = [
-    {
-      id: 0,
-      value: '全部'
-    },
-    {
-      id: 1,
-      value: 'high码'
-    },
-    {
-      id: 2,
-      value: 'high读'
-    },
-    {
-      id: 3,
-      value: 'high活'
-    }
-  ]
+  private get articleClassifies () {
+    return this.$store.state.classify.info
+  }
 
-  private articleTags = [
-    {
-      id: 0,
-      value: '全部'
-    },
-    {
-      id: 1,
-      value: 'javascript'
-    },
-    {
-      id: 2,
-      value: 'nodejs'
-    },
-    {
-      id: 3,
-      value: 'css'
-    },
-    {
-      id: 4,
-      value: 'html'
-    }
-  ]
+  private get articleTags () {
+    return this.$store.state.tag.info
+  }
 
   private article = {
     title: '',
     keywords: '',
-    tag:[],
-    desc: '',
+    tag: [],
+    description: '',
     content: '',
-    classify: 1,
-    release: 1,
-    status: 1,
-    cover: ''
+    state: 2,
+    publish: 2,
+    thumb: '',
+    classify: ''
+  }
+
+  private handleSaveArticle () {
+    this.$store.dispatch('article/postArticle', this.article)
   }
 
   private handleSuccess(res: any, file: any) {
-    this.article.cover = URL.createObjectURL(file.raw)
+    this.article.thumb = URL.createObjectURL(file.raw)
   }
 
   private beforeUpload(file: any) {
@@ -157,6 +125,18 @@ export default class Release extends Vue {
       this.$message.error('上传头像图片大小不能超过 2MB!')
     }
     return isJPG && isLt2M
+  }
+
+
+  private init() {
+    Promise.all([
+      this.$store.dispatch('classify/getClassifies'),
+      this.$store.dispatch('tag/getTags')
+    ])
+  }
+
+  private created () {
+    this.init()
   }
   
 }

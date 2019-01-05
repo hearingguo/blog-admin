@@ -14,12 +14,16 @@ interface HTMLElement {
 
 declare module 'element-ui'
 
-declare module 'nprogress'
-
 declare module 'vue-simplemde/src/markdown-editor'
 
 declare module 'highlight.js'
 
 declare module '*.jpg'
+
+declare interface IMdEditorConfig {
+  status: boolean;
+  indentWithTabs: boolean;
+  spellChecker: boolean;
+}
 
 

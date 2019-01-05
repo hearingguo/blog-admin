@@ -26,7 +26,7 @@ export default class Editor extends Vue {
 
   private content: string = ''
 
-  private configs: any = {
+  private configs: IMdEditorConfig = {
     status: false,
     indentWithTabs: false,
     spellChecker: false
