@@ -1,6 +1,6 @@
 <template>
   <el-dialog width="30%"
-    :title="title"
+    :title="modalTitle"
     :visible="visible"
     before-close="handleClose">
     <el-form ref="formTag" :model="formTag" label-width="40px">
@@ -13,7 +13,7 @@
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="handleClose">取 消</el-button>
-      <el-button type="primary" @click="handleAddClassify()">确 定</el-button>
+      <el-button type="primary" @click="handleAddTag()">确 定</el-button>
     </span>
   </el-dialog>
 </template>
@@ -21,6 +21,9 @@
 <script lang="ts">
 
 import { Component, Vue, Prop } from 'vue-property-decorator'
+import { toUpper } from '../utils/common'
+
+type IItem = ITagItem | IClassifyItem
 
 @Component
 export default class ModalTag extends Vue {
@@ -32,29 +35,30 @@ export default class ModalTag extends Vue {
   private visible: boolean
 
   @Prop()
-  private formTag: IClassifyItem | ITagItem
+  private formTag: IItem
 
   @Prop()
   private ctrlName: string
 
+  private get modalTitle() {
+    return this.title === 'tag'?'添加标签':'添加分类'
+  }
+
   private get currentRes() {
-    return this.$store.state.classify.currentRes
+    return this.$store.state[this.title].currentRes
   }
 
   private handleClose () {
     this.$emit('update:visible', false)
+    this.$emit('update:formTag', { title: '', description: '' })
   }
 
-  private async handleAddClassify (data: ILinkItem) {
-    if (this.ctrlName === 'put') {
-      await this.$store.dispatch('classify/putClassify', this.formTag)
-    } else {
-      await this.$store.dispatch('classify/postClassify', this.formTag)
-    }
-    
+  private async handleAddTag (data: IItem) {
+    await this.$store.dispatch(`${this.title}/${this.ctrlName}${toUpper(this.title)}`, this.formTag)
+
     if(this.currentRes.code) {
       this.handleClose()
-      this.$store.dispatch('classify/getClassifys')
+      this.$store.dispatch(`${this.title}/get${toUpper(this.title, true)}`)
       this.$emit('update:formTag', { title: '', description: '' })
     }
   }

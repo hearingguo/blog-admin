@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import { auth } from './modules/auth'
 import { option } from './modules/option'
 import { link } from './modules/link'
+import { tag } from './modules/tag'
 import { classify } from './modules/classify'
 
 Vue.use(Vuex)
@@ -12,6 +13,7 @@ export default new Vuex.Store({
     auth,
     option,
     link,
+    tag,
     classify
   }
 })

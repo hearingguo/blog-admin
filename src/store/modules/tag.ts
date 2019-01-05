@@ -1,24 +1,24 @@
 /**
  * 
- * Classify Store
+ * Tag Store
  * 
  */
 
 import { ActionTree, MutationTree } from 'vuex'
-import { classifys } from '@/service/index'
+import { tags } from '@/service/index'
 import { respSuccess } from '@/utils/response';
 
-export interface IClassifyInfo {
+export interface ITagInfo {
   loading: boolean;
   submitLoading: boolean;
   info: {
-    list: IClassifyItem[],
+    list: ITagItem[],
     pagination: IPagination
   };
   currentRes: Ajax.AjaxResponse
 }
 
-const state: IClassifyInfo = {
+const state: ITagInfo = {
   loading: false,
   submitLoading: false,
   info: {
@@ -38,58 +38,58 @@ const state: IClassifyInfo = {
   }
 }
 
-const actions: ActionTree<IClassifyInfo, any> = {
+const actions: ActionTree<ITagInfo, any> = {
 
-  // get classifies
-  async getClassifies (
+  // get tags
+  async getTags (
     { commit },
     params?: IQuerys
   ) {
     commit('FETCH_DATA')
-    const res = await classifys.getClassifies<IClassifyItem[]>(params)
-    if (res.code) commit('RECEIVE_CLASSIFYS', res)
+    const res = await tags.getTags<ITagItem[]>(params)
+    if (res.code) commit('RECEIVE_TAGS', res)
   },
 
-  // change classify
-  async putClassify(
+  // change tag
+  async putTag(
     { commit },
-    params: IClassifyItem
+    params: ITagItem
   ) {
     commit('FETCH_DATA_WAITTING')
-    const res = await classifys.putClassify<IClassifyItem>(params)
+    const res = await tags.putTag<ITagItem>(params)
     if (res.code) commit('FETCH_DATA_SUCCESS', res)
   },
 
-  // add classify
-  async postClassify (
+  // add tag
+  async postTag (
     { commit },
-    params: IClassifyItem
+    params: ITagItem
   ) {
     commit('FETCH_DATA_WAITTING')
-    const res = await classifys.postClassify<IClassifyItem>(params)
+    const res = await tags.postTag<ITagItem>(params)
     if (res.code) commit('FETCH_DATA_SUCCESS', res)
   },
 
-  //delete classify
-  async deleteClassify (
+  //delete tag
+  async deleteTag (
     { commit },
     id: string
   ) {
     commit('FETCH_DATA_WAITTING')
-    const res = await classifys.deleteClassify(id)
+    const res = await tags.deleteTag(id)
     if (res.code) commit('FETCH_DATA_SUCCESS', res)
   }
 
 }
 
-const mutations: MutationTree<IClassifyInfo> = {
+const mutations: MutationTree<ITagInfo> = {
   'FETCH_DATA'(
-    state: IClassifyInfo
+    state: ITagInfo
   ) {
     state.loading = true
   },
   'FETCH_DATA_SUCCESS'(
-    state: IClassifyInfo,
+    state: ITagInfo,
     res: Ajax.AjaxResponse
   ) {
     state.loading = false
@@ -97,12 +97,12 @@ const mutations: MutationTree<IClassifyInfo> = {
     respSuccess(res.message)
   },
   'FETCH_DATA_WAITTING'(
-    state: IClassifyInfo
+    state: ITagInfo
   ) {
     state.submitLoading = true
   },
-  'RECEIVE_CLASSIFYS'(
-    state: IClassifyInfo,
+  'RECEIVE_TAGS'(
+    state: ITagInfo,
     data: Ajax.AjaxResponse
   ) {
     state.loading = false
@@ -111,7 +111,7 @@ const mutations: MutationTree<IClassifyInfo> = {
   }
 }
 
-export const classify =  {
+export const tag =  {
   namespaced: true,
   state,
   actions,

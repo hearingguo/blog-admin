@@ -1,7 +1,7 @@
 import { ax } from '../axios'
 
 // get classifys 
-export function getClassifys<T = undefined> (
+export function getClassifies<T = undefined> (
   params?: IQuerys
 ): Promise<Ajax.AjaxResponse<T>> {
   const querys = params?params:{}

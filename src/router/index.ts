@@ -15,10 +15,7 @@ import Article from '@/pages/article/Article.vue'
 import Release from '@/pages/article/Release.vue'
 
 // tag manage
-import Tags from '@/pages/tags/Tags.vue' 
-
-// classification manage
-import Classification from '@/pages/classification/index.vue' 
+import Tags from '@/pages/tag/index.vue' 
 
 // comments
 import Comment from '@/pages/comment/Comment.vue' 
@@ -63,7 +60,7 @@ const routes: RouteConfig[] = [
     component: Index,
     meta: { requiresAuth: true, leaves: true, icon: 'icon-classification', show: true },
     children: [
-      { path: '/classification', component: Classification, name: '文章分类' }
+      { path: '/classify', component: Tags, name: '文章分类' }
     ]
   },
   {
@@ -72,7 +69,7 @@ const routes: RouteConfig[] = [
     component: Index,
     meta: { requiresAuth: true, leaves: true, icon: 'icon-tags', show: true },
     children: [
-      { path: '/tags', component: Tags, name: '文章标签' }
+      { path: '/tag', component: Tags, name: '文章标签' }
     ]
   },
   {
