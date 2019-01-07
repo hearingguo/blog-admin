@@ -1,6 +1,6 @@
 <template>
   <MdEditor
-    v-model="content" 
+    v-model="mdContent" 
     ref="mdEditor"
     :configs="configs"
     :highlight="true"
@@ -10,7 +10,7 @@
 
 <script lang="ts">
 
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
 import MdEditor from 'vue-simplemde/src/markdown-editor'
 import 'simplemde/dist/simplemde.min.css'
 import 'highlight.js/styles/atom-one-dark.css'
@@ -24,7 +24,17 @@ import hljs from 'highlight.js'
 })
 export default class Editor extends Vue {
 
-  private content: string = ''
+  @Prop()
+  private content: string
+
+  private get mdContent() {
+    return this.content
+  }
+
+  @Watch('mdContent')
+  onContentChange(val: any) {
+    this.$emit('update:content', this.mdContent)
+  }
 
   private configs: IMdEditorConfig = {
     status: false,

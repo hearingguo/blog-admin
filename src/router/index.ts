@@ -51,7 +51,7 @@ const routes: RouteConfig[] = [
     meta: { requiresAuth: true, leaves: false, icon: 'icon-article',  show: true },
     children: [
       { path: '/article/index', component: Article, name: '文章列表', meta: { icon: 'icon-list'} },
-      { path: '/article/release', component: Release, name: '文章发布', meta: { icon: 'icon-release'} }
+      { path: '/article/release/:id?', component: Release, name: '文章发布', meta: { icon: 'icon-release'} }
     ]
   },
   {

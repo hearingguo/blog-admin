@@ -1,6 +1,6 @@
 declare interface IArticleItem {
   title: string;
-  keywords: string;
+  keyword: string;
   tag: string[];
   description: string;
   content: string;

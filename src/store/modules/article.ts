@@ -7,6 +7,7 @@
 import { ActionTree, MutationTree } from 'vuex'
 import { articles } from '@/service/index'
 import { respSuccess } from '@/utils/response';
+import { getArticle } from '@/service/modules/article';
 
 export interface IArticleInfo {
   loading: boolean;
@@ -36,6 +37,26 @@ const actions: ActionTree<IArticleInfo, any> = {
   ) {
     commit('FETCH_DATA')
     const res = await articles.postArticle<IArticleItem>(params)
+    if (res.code) commit('FETCH_DATA_SUCCESS', res)
+  },
+
+  // get article
+  async getArticle (
+    { commit },
+    id: string
+  ) {
+    commit('FETCH_DATA')
+    const res = await articles.getArticle<IArticleItem>(id)
+    if (res.code) commit('FETCH_DATA_SUCCESS', res)
+  },
+
+  // put article
+  async putArticle (
+    { commit },
+    id: string
+  ) {
+    commit('FETCH_DATA')
+    const res = await articles.getArticle<IArticleItem>(id)
     if (res.code) commit('FETCH_DATA_SUCCESS', res)
   },
 
