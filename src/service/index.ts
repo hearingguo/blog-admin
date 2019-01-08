@@ -4,6 +4,7 @@ import * as links from './modules/link';
 import * as classifys from './modules/classify';
 import * as tags from './modules/tag';
 import * as articles from './modules/article';
+import * as comments from './modules/comment';
 
 export {
   auths,
@@ -11,5 +12,6 @@ export {
   links,
   classifys,
   tags,
-  articles
+  articles,
+  comments
 }

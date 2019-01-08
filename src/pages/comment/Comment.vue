@@ -5,7 +5,7 @@
     <div class="filter-card">
       <el-form ref="comment" :model="comment" label-width="40px">
         <el-form-item label="状态">
-          <el-radio-group v-model="comment.status" size="small">
+          <el-radio-group v-model="comment.state" size="small">
             <el-radio-button :label="0">全部</el-radio-button>
             <el-radio-button :label="1">通过</el-radio-button>
             <el-radio-button :label="2">不通过</el-radio-button>
@@ -16,7 +16,7 @@
           <el-col :span="5">
             <el-input v-model="comment.search" size="small" placeholder="search..."></el-input>
           </el-col>
-          <el-button class="ml1" type="primary" size="small" icon="el-icon-search">查询</el-button>
+          <el-button class="ml1" type="primary" size="small" icon="el-icon-search">开始查询</el-button>
         </el-form-item>
       </el-form>
     </div>

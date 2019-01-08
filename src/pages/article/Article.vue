@@ -68,7 +68,7 @@
               </div>
               <el-button type="danger" slot="reference" plain size="small" @click="scope.row.isVisiblePop = true">删除</el-button>
             </el-popover>
-            <el-button type="primary" size="small"
+            <el-button type="danger" plain size="small"
               @click="handlePatchArticle({
                 _id: scope.row._id, 
                 publish: scope.row.publish === 1?2:1
