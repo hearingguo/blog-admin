@@ -8,7 +8,7 @@
       <template v-for="(item, index) in $router.options.routes">
         <el-submenu
           v-if="item.meta.show && !item.meta.leaves && item.children"
-          :index="index"
+          :index="String(index)"
           :key="index">
           <template slot="title">
             <i :class="['iconfont', item.meta.icon]"></i>
@@ -16,6 +16,7 @@
           </template>
           <el-menu-item
             v-for="child in item.children"
+            :index="child.path"
             :route="child"
             :key="child.path">
             <i :class="['iconfont', child.meta.icon]"></i>
@@ -27,6 +28,7 @@
         <el-menu-item
           v-if="item.meta.show && item.meta.leaves && item.children"
           :route="item.children[0]"
+          :index="item.children[0].path"
           :key="index">
           <i :class="['iconfont', item.meta.icon]"></i>
           <span>{{item.name}}</span>

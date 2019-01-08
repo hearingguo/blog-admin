@@ -10,3 +10,9 @@ declare interface IArticleItem {
   classify: string;
   _id?: string;
 }
+
+declare interface IArticleState {
+  _id: string;
+  state?: number;
+  publish?: number;
+}

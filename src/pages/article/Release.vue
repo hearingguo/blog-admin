@@ -60,7 +60,7 @@
               <el-radio-button label="2">私密</el-radio-button>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="缩略图" required>
+          <el-form-item label="缩略图">
             <el-upload
               class="img-uploader"
               action=""
@@ -80,7 +80,7 @@
 
 <script lang="ts">
 
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import MarkdownEditor from '@/components/common/MdEditor.vue'
 
 @Component({
@@ -89,6 +89,23 @@ import MarkdownEditor from '@/components/common/MdEditor.vue'
   }
 })
 export default class Release extends Vue {
+
+  private article: IArticleItem = {
+    title: '',
+    keyword: '',
+    tag: [],
+    description: '',
+    content: '',
+    state: 2,
+    publish: 2,
+    thumb: '',
+    classify: ''
+  }
+
+  @Watch('currentArticle', { immediate: false, deep: true})
+  onCurrentChange(article: IArticleItem) {
+    this.article = article
+  }
 
   private get paramsId () {
     return this.$route.params.id
@@ -102,23 +119,15 @@ export default class Release extends Vue {
     return this.$store.state.tag.info
   }
 
-  private get article () {
+  private get currentArticle () {
     const result = this.$store.state.article.currentRes.result
     if(this.paramsId && result) {
       const { createDate, meta, tag, updateDate, __v, ...rest } = result
-      return { ...rest, tag: tag.map((item: ITagItem) => item._id) }
+      const tags = tag.map((item: ITagItem) => item._id)
+      console.log(tag)
+      return { ...rest, tag: tags }
     }
-    return {
-        title: '',
-        keyword: '',
-        tag: [],
-        description: '',
-        content: '',
-        state: 2,
-        publish: 2,
-        thumb: '',
-        classify: ''
-      }
+    return {}
   }
 
   private handleSaveArticle () {

@@ -10,4 +10,9 @@ declare interface IQuerys {
   sPage: number;
   keyword: string;
   state: string;
+  publish: number;
+  tag: string[];
+  classify: string;
+  date: string;
+  hot: boolean;
 }

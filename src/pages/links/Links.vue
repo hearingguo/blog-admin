@@ -90,7 +90,7 @@ export default class Links extends Vue {
 
     return {
       list,
-      pagination: info.info
+      pagination: info.pagination
     }
   }
 

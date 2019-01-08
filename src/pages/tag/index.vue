@@ -63,7 +63,7 @@ export default class Tags extends Vue {
 
     return {
       list,
-      pagination: info.info
+      pagination: info.pagination
     }
   }
 

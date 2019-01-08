@@ -12,14 +12,25 @@ import { getArticle } from '@/service/modules/article';
 export interface IArticleInfo {
   loading: boolean;
   submitLoading: boolean;
-  allArticles: IArticleItem[]
+  articles: {
+    list: IArticleItem[];
+    pagination: IPagination;
+  }
   currentRes: Ajax.AjaxResponse
 }
 
 const state: IArticleInfo = {
   loading: false,
   submitLoading: false,
-  allArticles: [],
+  articles: {
+    list: [],
+    pagination: {
+      cPage: 1,
+      sPage: 10,
+      tPage: 1,
+      total: 1
+    }
+  },
   currentRes: {
     success: false,
     code: 0,
@@ -60,6 +71,36 @@ const actions: ActionTree<IArticleInfo, any> = {
     if (res.code) commit('FETCH_DATA_SUCCESS', res)
   },
 
+  // get articles
+  async getArticles (
+    { commit },
+    params?: IQuerys
+  ) {
+    commit('FETCH_DATA')
+    const res = await articles.getArticles<IArticleItem[]>(params)
+    if (res.code) commit('RECEIVE_ARTICLES', res)
+  },
+
+  // patch articles
+  async patchArticle (
+    { commit },
+    params: IArticleState
+  ) {
+    commit('FETCH_DATA')
+    const res = await articles.patchArticle(params)
+    if (res.code) commit('FETCH_DATA_SUCCESS', res)
+  },
+
+  // delete article
+  async deleteArticle (
+    { commit },
+    id: string
+  ) {
+    commit('FETCH_DATA')
+    const res = await articles.deleteArticle(id)
+    if (res.code) commit('FETCH_DATA_SUCCESS', res)
+  }
+
   // // post article
   // async getAllArticles (
   //   { commit }
@@ -91,13 +132,12 @@ const mutations: MutationTree<IArticleInfo> = {
   ) {
     state.submitLoading = true
   },
-  'RECEIVE_ALL_ARTICLES'(
+  'RECEIVE_ARTICLES'(
     state: IArticleInfo,
     data: Ajax.AjaxResponse
   ) {
     state.loading = false
-    state.submitLoading = false
-    state.allArticles = data.result
+    state.articles = data.result
   }
 }
 

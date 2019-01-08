@@ -1,56 +1,68 @@
 <template>
   <div class="filter-card">
-    <el-form ref="form" :model="articleForm" label-width="40px">
+    <el-form ref="form" :model="articleFilter" label-width="60px">
       <!-- tags -->
-      <el-form-item label="分类">
-        <el-radio-group v-model="articleForm.classify" size="small">
+      <el-form-item label="分类:">
+        <el-radio-group v-model="articleFilter.classify" size="small">
+          <el-radio-button label="">全部</el-radio-button>
           <el-radio-button
-            v-for="(item, index) in articleClassifies"
-            :label="item.id"
-            :key="index">{{ item.value }}</el-radio-button>
+            v-for="(item, index) in classifies"
+            :label="item._id"
+            :key="index">{{ item.title }}</el-radio-button>
         </el-radio-group>
       </el-form-item>
 
       <!-- tags -->
-      <el-form-item label="标签">
-        <el-checkbox-group v-model="articleForm.tag" size="small">
+      <el-form-item label="标签:">
+        <el-checkbox-group v-model="articleFilter.tag" size="small">
+          <el-checkbox-button label="">全部</el-checkbox-button>
           <el-checkbox-button
-            v-for="(item, index) in articleTags"
-            :label="item.id"
-            :key="index">{{ item.value }}</el-checkbox-button>
+          v-for="(item, index) in tags"
+          :label="item._id"
+          :key="index">{{ item.title }}</el-checkbox-button>
         </el-checkbox-group>
       </el-form-item>
       
       <!-- 权限 -->
-      <el-form-item label="权限">
-        <el-radio-group v-model="articleForm.release" size="small">
+      <el-form-item label="权限:">
+        <el-radio-group v-model="articleFilter.publish" size="small">
           <el-radio-button :label="0">全部</el-radio-button>
-          <el-radio-button :label="1">私密</el-radio-button>
-          <el-radio-button :label="2">公开</el-radio-button>
+          <el-radio-button :label="1">公开</el-radio-button>
+          <el-radio-button :label="2">私密</el-radio-button>
+        </el-radio-group>
+      </el-form-item>
+
+      <!-- 发布 -->
+      <el-form-item label="发布:">
+        <el-radio-group v-model="articleFilter.state" size="small">
+          <el-radio-button :label="0">全部</el-radio-button>
+          <el-radio-button :label="2">草稿</el-radio-button>
+          <el-radio-button :label="1">发布</el-radio-button>
         </el-radio-group>
       </el-form-item>
 
       <!-- 搜索 -->
-      <el-form-item label="搜索">
+      <el-form-item label="关键词:">
         <el-col :span="5">
-          <el-input v-model="articleForm.search" size="small" placeholder="search..."></el-input>
+          <el-input v-model="articleFilter.keyword" size="small" placeholder="search..."></el-input>
         </el-col>
-        <el-button class="ml1" type="primary" size="small" icon="el-icon-search" >查询</el-button>
       </el-form-item>
 
     </el-form>
+    <el-button class="mtb1 fr" type="primary" size="small" icon="el-icon-search" @click="handleSearch()">开始查询</el-button>
   </div>
 </template>
 
 <script lang="ts">
 
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
 
-interface ArticleForm {
-  classify: number | string
-  tag: Array<number|string>
-  release: number | string
-  search: string
+interface ArticleFilter {
+  classify: string
+  tag: Array<string>
+  publish: number
+  state: number
+  keyword: string
 }
 
 interface Item {
@@ -60,58 +72,30 @@ interface Item {
 
 @Component
 export default class FilterCard extends Vue {
-  private articleForm: ArticleForm = {
-    classify: 0,
-    tag: [0],
-    release: 0,
-    search: ''
+  private articleFilter: ArticleFilter = {
+    classify: '',
+    tag: [''],
+    publish: 0,
+    state: 0,
+    keyword: ''
   }
 
-  private articleClassifies: Item[] = [
-    {
-      id: 0,
-      value: '全部'
-    },
-    {
-      id: 1,
-      value: 'high码'
-    },
-    {
-      id: 2,
-      value: 'high读'
-    },
-    {
-      id: 3,
-      value: 'high活'
+  @Prop()
+  private classifies: IClassifyItem[]
+
+  @Prop()
+  private tags: ITagItem[]
+
+  @Watch('articleFilter.tag')
+  onTagChange(tags: string[]) {
+    if (tags.includes('')){
+      this.articleFilter.tag = tags.filter(item => !item)
     }
-  ]
+  }
 
-  private articleTags: Item[] = [
-    {
-      id: 0,
-      value: '全部'
-    },
-    {
-      id: 1,
-      value: 'javascript'
-    },
-    {
-      id: 2,
-      value: 'nodejs'
-    },
-    {
-      id: 3,
-      value: 'css'
-    },
-    {
-      id: 4,
-      value: 'html'
-    }
-  ]
-
-  // @Prop()
-  // readonly 
-
+  private handleSearch () {
+    this.$store.dispatch('article/getArticles', this.articleFilter)
+  }
   
 }
 
