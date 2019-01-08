@@ -38,9 +38,10 @@ export function patchArticle<T = undefined> (
 
 // change article
 export function putArticle<T = undefined> (
-  id: string
+  params: IArticleItem
 ): Promise<Ajax.AjaxResponse<T>> {
-  return ax.put<Ajax.AjaxResponse<T>>(`/article/${id}`)
+  const { _id, ...rest} = params
+  return ax.put<Ajax.AjaxResponse<T>>(`/article/${_id}`, rest)
           .then(res => res.data)
 }
 

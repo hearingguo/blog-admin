@@ -26,4 +26,8 @@ declare interface IMdEditorConfig {
   spellChecker: boolean;
 }
 
+interface Window {
+  hljs: any
+}
+
 

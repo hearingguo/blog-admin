@@ -90,7 +90,9 @@ import MarkdownEditor from '@/components/common/MdEditor.vue'
 })
 export default class Release extends Vue {
 
-  private paramsId: string = this.$route.params.id
+  private get paramsId () {
+    return this.$route.params.id
+  }
 
   private get articleClassifies () {
     return this.$store.state.classify.info
@@ -103,8 +105,8 @@ export default class Release extends Vue {
   private get article () {
     const result = this.$store.state.article.currentRes.result
     if(this.paramsId && result) {
-      const { _id, title, keyword, description, content, state, publish, thumb, classify, tag } = result
-      return { _id, title, keyword, description, content, state, publish, thumb, classify, tag: tag.map((item: ITagItem) => item._id) }
+      const { createDate, meta, tag, updateDate, __v, ...rest } = result
+      return { ...rest, tag: tag.map((item: ITagItem) => item._id) }
     }
     return {
         title: '',

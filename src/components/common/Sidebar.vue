@@ -16,7 +16,7 @@
           </template>
           <el-menu-item
             v-for="child in item.children"
-            :index="child.path"
+            :route="child"
             :key="child.path">
             <i :class="['iconfont', child.meta.icon]"></i>
             <span class="text">
@@ -26,7 +26,7 @@
         </el-submenu>
         <el-menu-item
           v-if="item.meta.show && item.meta.leaves && item.children"
-          :index="item.children[0].path"
+          :route="item.children[0]"
           :key="index">
           <i :class="['iconfont', item.meta.icon]"></i>
           <span>{{item.name}}</span>

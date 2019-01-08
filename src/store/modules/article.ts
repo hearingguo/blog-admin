@@ -53,21 +53,21 @@ const actions: ActionTree<IArticleInfo, any> = {
   // put article
   async putArticle (
     { commit },
-    id: string
+    params: IArticleItem
   ) {
     commit('FETCH_DATA')
-    const res = await articles.getArticle<IArticleItem>(id)
+    const res = await articles.putArticle<IArticleItem>(params)
     if (res.code) commit('FETCH_DATA_SUCCESS', res)
   },
 
-  // post article
-  async getAllArticles (
-    { commit }
-  ) {
-    commit('FETCH_DATA')
-    const res = await articles.getAllArticles<IArticleItem[]>()
-    if (res.code) commit('RECEIVE_ALL_ARTICLES', res)
-  },
+  // // post article
+  // async getAllArticles (
+  //   { commit }
+  // ) {
+  //   commit('FETCH_DATA')
+  //   const res = await articles.getAllArticles<IArticleItem[]>()
+  //   if (res.code) commit('RECEIVE_ALL_ARTICLES', res)
+  // },
 
 
 }

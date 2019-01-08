@@ -15,7 +15,8 @@ import MdEditor from 'vue-simplemde/src/markdown-editor'
 import 'simplemde/dist/simplemde.min.css'
 import 'highlight.js/styles/atom-one-dark.css'
 import hljs from 'highlight.js'
-(window as any).hljs = hljs
+
+window.hljs = hljs
 
 @Component({
   components: {
@@ -24,16 +25,19 @@ import hljs from 'highlight.js'
 })
 export default class Editor extends Vue {
 
+  private mdContent: string = ''
+
   @Prop()
   private content: string
 
-  private get mdContent() {
-    return this.content
+  @Watch('content')
+  onContentChange(nVal: string){
+    this.mdContent = nVal
   }
 
   @Watch('mdContent')
-  onContentChange(val: any) {
-    this.$emit('update:content', this.mdContent)
+  onMDContentChange(nVal: string) {
+    this.$emit('update:content', nVal)
   }
 
   private configs: IMdEditorConfig = {
