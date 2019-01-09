@@ -10,11 +10,8 @@
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" inline class="table-expand">
-              <el-form-item label="创建日期">
+              <el-form-item label="时间">
                 <span>{{ dayjs(props.row.createDate).format('YYYY-MM-DD HH:mm:ss') }}</span>
-              </el-form-item>
-              <el-form-item label="更新日期">
-                <span>{{ dayjs(props.row.updateDate).format('YYYY-MM-DD HH:mm:ss') }}</span>
               </el-form-item>
               <el-form-item label="关键字">
                 <span>{{ props.row.keyword }}</span>
@@ -153,7 +150,5 @@ export default class Article extends Vue {
 
 <style lang="less" scoped>
   @import '../../assets/styles/vars.less';
-
-
 
 </style>

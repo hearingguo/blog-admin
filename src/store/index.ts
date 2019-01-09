@@ -6,6 +6,7 @@ import { link } from './modules/link'
 import { tag } from './modules/tag'
 import { classify } from './modules/classify'
 import { article } from './modules/article'
+import { comment } from './modules/comment'
 
 Vue.use(Vuex)
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     link,
     tag,
     classify,
-    article
+    article,
+    comment
   }
 })

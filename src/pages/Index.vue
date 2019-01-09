@@ -2,7 +2,7 @@
 <transition name="fade">
     <el-row class="content">
       <!-- header -->
-      <Header/>
+      <Header :authInfo="authorInfos"/>
 
       <el-container>
         <!-- sidebar -->
@@ -43,6 +43,14 @@ import Breadcrumb from '@/components/common/Breadcrumb.vue'
   }
 })
 export default class Home extends Vue {
+
+  private get authorInfos () {
+    return this.$store.state.auth.info
+  }
+
+  private beforeCreate() {
+    this.$store.dispatch('auth/getAuth')
+  }
 
 }
 

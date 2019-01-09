@@ -7,7 +7,6 @@
 import { ActionTree, MutationTree } from 'vuex'
 import { articles } from '@/service/index'
 import { respSuccess } from '@/utils/response';
-import { getArticle } from '@/service/modules/article';
 
 export interface IArticleInfo {
   loading: boolean;
@@ -100,16 +99,6 @@ const actions: ActionTree<IArticleInfo, any> = {
     const res = await articles.deleteArticle(id)
     if (res.code) commit('FETCH_DATA_SUCCESS', res)
   }
-
-  // // post article
-  // async getAllArticles (
-  //   { commit }
-  // ) {
-  //   commit('FETCH_DATA')
-  //   const res = await articles.getAllArticles<IArticleItem[]>()
-  //   if (res.code) commit('RECEIVE_ALL_ARTICLES', res)
-  // },
-
 
 }
 

@@ -28,8 +28,10 @@ export function putComment<T = undefined> (
 
 // delete comment
 export function deleteComment (
-  id: string
+  params: ICommentItem
 ): Promise<Ajax.AjaxResponse> {
-  return ax.delete(`/comment/${id}`)
+  const { _id, ...rest} = params
+  const querys = rest?rest:{}
+  return ax.delete(`/comment/${_id}`, {params: querys})
           .then(res => res.data)
 }

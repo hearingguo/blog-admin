@@ -133,7 +133,6 @@ export default class Info extends Vue {
   }
 
   private beforeCreate() {
-    this.$store.dispatch('auth/getAuth')
     this.$store.dispatch('option/getOption')
   }
 }
