@@ -1,30 +1,30 @@
 <template>
   <el-row class="b-login tc">
-    <el-card class="content">
-      <div class="title">管理员登录</div>
-      <el-form :model="form" ref="form">
+    <el-card class="content" :body-style="{ width: '80%', margin: '0 auto' }">
+      <div class="title">ADMINISTRATOR</div>
+      <el-form :model="loginForm" ref="form">
         <el-form-item
           prop="username"
           :rules="[
-            { required: true, message: '用户名', trigger: 'blur' },
-            { min: 5, message: '账号至少5位', trigger: 'blur' }
+            { required: true, message: 'Account is required!', trigger: 'blur' },
+            { min: 5, message: 'Account length is no less than five!', trigger: 'blur' }
           ]">
-          <el-input placeholder="管理员账号" v-model="form.username" :maxlength="40"></el-input>
+          <el-input placeholder="ACCOUNT" v-model="loginForm.username" :maxlength="40"></el-input>
         </el-form-item>
         <el-form-item
           prop="password"
           :rules="[
-            { required: true, message: '密码', trigger: 'blur' },
-            { min: 6, message: '密码至少6位', trigger: 'blur' }
+            { required: true, message: 'Password is required!', trigger: 'blur' },
+            { min: 6, message: 'Account length is no less than six!', trigger: 'blur' }
           ]">
           <el-input 
-            placeholder="密码" 
-            v-model="form.password" 
+            placeholder="PASSWORD" 
+            v-model="loginForm.password" 
             :maxlength="40" 
             type="password"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submit" size="small">Submit</el-button>
+          <el-button type="primary" :loading="false" @click="submit" size="small">SUBMIT</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -47,34 +47,32 @@ export default class Login extends Vue {
     form: HTMLFormElement
   }
 
-  private form: FormLogin = {
+  private loginForm: FormLogin = {
     username: '',
     password: ''
+  }
+
+  private get loginInfo() {
+    return this.$store.state.auth.login
+  }
+
+  private get submitLoading() {
+    return this.$store.state.auth.submitLoading
   }
 
   // 提交表单
   private submit (): void {
     this.$refs.form.validate(async (valid: boolean): Promise<boolean> => {
       if (valid) {
-        // const res: Ajax.AjaxResponse = await axios('login', { ...this.form })
-        // if (res.code !== 1) return false
-        this.$router.push(this.$route.query.redirect || '/home')
+        const res = await this.$store.dispatch('auth/login', this.loginForm)
+        if (!this.loginInfo.name) return false
+        this.$router.push(this.$route.query.redirect || '/')
         return true
       } else {
         return false
       }
     })
   }
-
-
-  // 登录
-  // export function login (
-  //   params: StoreState.Login
-  // ): Promise<Ajax.AjaxResponse> {
-  //   return ax.post('/login', { ...params })
-  //             .then((res: Ajax.AxiosResponse) => res.data)
-  //             .catch((e: string) => console.error(e))
-  // }
   
 }
 </script>

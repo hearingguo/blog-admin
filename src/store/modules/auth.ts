@@ -11,6 +11,10 @@ export interface IAuthInfo {
   loading: boolean;
   submitLoading: boolean;
   info: IAuth;
+  login: {
+    name: string;
+    lifeTime: string;
+  };
 }
 
 const state: IAuthInfo = {
@@ -21,13 +25,17 @@ const state: IAuthInfo = {
     username: '',
     nickname: '',
     signature: ''
+  },
+  login: {
+    name: '',
+    lifeTime: ''
   }
 }
 
 const actions: ActionTree<IAuthInfo, any> = {
 
   // sign in
-  async signin (
+  async login (
     { commit },
     params: ISignParams
   ) {
@@ -62,6 +70,7 @@ const mutations: MutationTree<IAuthInfo> = {
     state: IAuthInfo
   ) {
     state.loading = true
+    state.submitLoading = true
   },
   'FETCH_DATA_WAITTING'(
     state: IAuthInfo
@@ -77,9 +86,11 @@ const mutations: MutationTree<IAuthInfo> = {
     state.info = data.result
   },
   'SIGN_SUCCESS'(
-    state: IAuthInfo
+    state: IAuthInfo,
+    data: Ajax.AjaxResponse
   ) {
     state.submitLoading = false
+    state.login = data.result
   }
 }
 
