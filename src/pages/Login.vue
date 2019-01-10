@@ -24,7 +24,7 @@
             type="password"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" :loading="false" @click="submit" size="small">SUBMIT</el-button>
+          <el-button type="primary" :loading="submitLoading" @click="submit" size="small">SUBMIT</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -65,7 +65,7 @@ export default class Login extends Vue {
     this.$refs.form.validate(async (valid: boolean): Promise<boolean> => {
       if (valid) {
         const res = await this.$store.dispatch('auth/login', this.loginForm)
-        if (!this.loginInfo.name) return false
+        if (!this.loginInfo.lifeTime) return false
         this.$router.push(this.$route.query.redirect || '/')
         return true
       } else {

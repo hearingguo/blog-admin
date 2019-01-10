@@ -41,7 +41,10 @@ const actions: ActionTree<IAuthInfo, any> = {
   ) {
     commit('FETCH_DATA_WAITTING')
     const res = await auths.signin<IAuth>(params)
-    commit('SIGN_SUCCESS', res)
+    if(res.code) {
+      window.localStorage.setItem('TOKEN', JSON.stringify(res.result))
+      commit('SIGN_SUCCESS', res)
+    }
   },
 
   // get auth info
@@ -50,7 +53,7 @@ const actions: ActionTree<IAuthInfo, any> = {
   ) {
     commit('FETCH_DATA')
     const res = await auths.getAuth<IAuth>()
-    commit('RECEIVE_AUTH', res)
+    if(res.code) commit('RECEIVE_AUTH', res)
   },
 
   // get auth info
@@ -60,7 +63,7 @@ const actions: ActionTree<IAuthInfo, any> = {
   ) {
     commit('FETCH_DATA_WAITTING')
     const res = await auths.putAuth<IAuth>(params)
-    commit('RECEIVE_AUTH', res)
+    if(res.code) commit('RECEIVE_AUTH', res)
   }
 
 }

@@ -1,7 +1,8 @@
 import Vue from 'vue'
-import Router, { RouteConfig } from 'vue-router'
+import Router, { RouteConfig, Route, NavigationGuard, RawLocation }  from 'vue-router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import { sigin } from '@/utils/sigin'
 
 // login
 import login from '@/pages/Login.vue'
@@ -106,13 +107,24 @@ const router: Router = new Router({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  NProgress.start()
-  next()
-})
-
 router.afterEach(transition => {
   NProgress.done()
+})
+
+router.beforeEach((to: Route, from: Route, next: any): void => {
+  NProgress.start()
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!sigin()) {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
 })
 
 export default router

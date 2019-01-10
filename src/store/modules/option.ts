@@ -35,7 +35,7 @@ const actions: ActionTree<IOptionInfo, any> = {
   ) {
     commit('FETCH_DATA')
     const res = await options.getOption<IOption>()
-    commit('RECEIVE_OPTION', res)
+    if(res.code) commit('RECEIVE_OPTION', res)
   },
 
   // get auth info
@@ -45,7 +45,7 @@ const actions: ActionTree<IOptionInfo, any> = {
   ) {
     commit('FETCH_DATA_WAITTING')
     const res = await options.putOption<IOption>(params)
-    commit('RECEIVE_OPTION', res)
+    if(res.code) commit('RECEIVE_OPTION', res)
   }
 
 }
