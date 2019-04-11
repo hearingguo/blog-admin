@@ -16,7 +16,7 @@
         width="80">
       </el-table-column>
       <el-table-column
-        prop="username"
+        prop="name"
         label="友情人"
         width="180">
       </el-table-column>
@@ -35,7 +35,7 @@
             placement="top"
             width="160"
             v-model="scope.row.isVisiblePop">
-            <p>{{ `确认删除关于${scope.row.username}的友情链接么？` }}</p>
+            <p>{{ `确认删除关于${scope.row.name}的友情链接么？` }}</p>
             <div style="text-align: right; margin: 10px 0 0;">
               <el-button size="mini" type="text" @click="scope.row.isVisiblePop = false">取消</el-button>
               <el-button type="danger" plain size="mini" @click="handleDeleteLink(scope.row._id); scope.row.isVisiblePop = false">确定</el-button>
@@ -80,7 +80,7 @@ export default class Links extends Vue {
   private ctrlName: string = 'post'
 
   private formLink: ILinkItem = {
-    username: '',
+    name: '',
     url: ''
   }
 
@@ -97,8 +97,8 @@ export default class Links extends Vue {
   private handleChangeLink (link: ILinkItem) {
     this.visible = true
     this.ctrlName = 'put'
-    const { _id, username, url } = link
-    this.formLink = { _id, username, url }
+    const { _id, name, url } = link
+    this.formLink = { _id, name, url }
   }
 
   private async handleDeleteLink (id: string) {

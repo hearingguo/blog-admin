@@ -6,6 +6,7 @@
 
 import { ActionTree, MutationTree } from 'vuex'
 import { auths } from '@/service/index'
+import { respSuccess } from '@/utils/response';
 
 export interface IAuthInfo {
   loading: boolean;
@@ -53,7 +54,10 @@ const actions: ActionTree<IAuthInfo, any> = {
   ) {
     commit('FETCH_DATA')
     const res = await auths.getAuth<IAuth>()
-    if(res.code) commit('RECEIVE_AUTH', res)
+    if(res.code) commit('RECEIVE_AUTH', {
+      res,
+      isEdit: false
+    })
   },
 
   // get auth info
@@ -63,7 +67,10 @@ const actions: ActionTree<IAuthInfo, any> = {
   ) {
     commit('FETCH_DATA_WAITTING')
     const res = await auths.putAuth<IAuth>(params)
-    if(res.code) commit('RECEIVE_AUTH', res)
+    if(res.code) commit('RECEIVE_AUTH', {
+      res,
+      isEdit: true
+    })
   }
 
 }
@@ -82,11 +89,15 @@ const mutations: MutationTree<IAuthInfo> = {
   },
   'RECEIVE_AUTH'(
     state: IAuthInfo,
-    data: Ajax.AjaxResponse
+    data: {
+      res: Ajax.AjaxResponse,
+      isEdit?: boolean
+    }
   ) {
     state.loading = false
     state.submitLoading = false
-    state.info = data.result
+    state.info = data.res.result
+    data.isEdit && respSuccess(data.res.message)
   },
   'SIGN_SUCCESS'(
     state: IAuthInfo,
@@ -94,6 +105,7 @@ const mutations: MutationTree<IAuthInfo> = {
   ) {
     state.submitLoading = false
     state.login = data.result
+    respSuccess(data.message)
   }
 }
 

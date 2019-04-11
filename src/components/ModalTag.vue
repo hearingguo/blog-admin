@@ -7,6 +7,9 @@
       <el-form-item label="标题">
         <el-input v-model="formTag.title" placeholder="title..."></el-input>
       </el-form-item>
+      <el-form-item label="路由" v-if="title!='tag'">
+        <el-input v-model="formTag.name" placeholder="route..."></el-input>
+      </el-form-item>
       <el-form-item label="描述">
         <el-input type="textarea" :rows="4" v-model="formTag.description" placeholder="description..."></el-input>
       </el-form-item>
@@ -50,7 +53,7 @@ export default class ModalTag extends Vue {
 
   private handleClose () {
     this.$emit('update:visible', false)
-    this.$emit('update:formTag', { title: '', description: '' })
+    this.$emit('update:formTag', { title: '', name: '', description: '' })
   }
 
   private async handleAddTag (data: IItem) {
@@ -59,7 +62,7 @@ export default class ModalTag extends Vue {
     if(this.currentRes.code) {
       this.handleClose()
       this.$store.dispatch(`${this.title}/get${toUpper(this.title, true)}`)
-      this.$emit('update:formTag', { title: '', description: '' })
+      this.$emit('update:formTag', { title: '', name: '', description: '' })
     }
   }
   

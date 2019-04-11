@@ -1,5 +1,5 @@
 declare interface ILinkItem {
-  username: string;
+  name: string;
   url: string;
   _id?: string;
   createDate?: Date;

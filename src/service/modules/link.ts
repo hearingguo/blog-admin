@@ -13,8 +13,8 @@ export function getLinks<T = undefined> (
 export function putLink<T = undefined> (
   params: ILinkItem
 ): Promise<Ajax.AjaxResponse<T>> {
-  const { username, url } = params
-  return ax.put<Ajax.AjaxResponse<T>>(`/link/${params._id}`, { username, url })
+  const { name, url } = params
+  return ax.put<Ajax.AjaxResponse<T>>(`/link/${params._id}`, { name, url })
           .then(res => res.data)
 }
 

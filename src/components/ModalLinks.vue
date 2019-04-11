@@ -5,7 +5,7 @@
     before-close="handleClose">
     <el-form ref="formLink" :model="formLink" label-width="40px">
       <el-form-item label="名称">
-        <el-input v-model="formLink.username" placeholder="username..."></el-input>
+        <el-input v-model="formLink.name" placeholder="name..."></el-input>
       </el-form-item>
       <el-form-item label="URL">
         <el-input type="textarea" :rows="4" v-model="formLink.url" placeholder="url..."></el-input>
@@ -55,7 +55,7 @@ export default class ModalTag extends Vue {
     if(this.currentRes.code) {
       this.handleClose()
       this.$store.dispatch('link/getLinks')
-      this.$emit('update:formLink', { username: '', url: '' })
+      this.$emit('update:formLink', { name: '', url: '' })
     }
   }
   

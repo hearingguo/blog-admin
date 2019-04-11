@@ -6,6 +6,7 @@
 
 import { ActionTree, MutationTree } from 'vuex'
 import { options } from '@/service/index'
+import { respSuccess } from '@/utils/response';
 
 export interface IOptionInfo {
   loading: boolean;
@@ -35,7 +36,10 @@ const actions: ActionTree<IOptionInfo, any> = {
   ) {
     commit('FETCH_DATA')
     const res = await options.getOption<IOption>()
-    if(res.code) commit('RECEIVE_OPTION', res)
+    if(res.code) commit('RECEIVE_OPTION', {
+      res,
+      isEdit: false
+    })
   },
 
   // get auth info
@@ -45,7 +49,10 @@ const actions: ActionTree<IOptionInfo, any> = {
   ) {
     commit('FETCH_DATA_WAITTING')
     const res = await options.putOption<IOption>(params)
-    if(res.code) commit('RECEIVE_OPTION', res)
+    if(res.code) commit('RECEIVE_OPTION', {
+      res,
+      isEdit: true
+    })
   }
 
 }
@@ -63,11 +70,15 @@ const mutations: MutationTree<IOptionInfo> = {
   },
   'RECEIVE_OPTION'(
     state: IOptionInfo,
-    data: Ajax.AjaxResponse
+    data: {
+      res: Ajax.AjaxResponse,
+      isEdit?: boolean
+    }
   ) {
     state.loading = false
     state.submitLoading = false
-    state.info = data.result
+    state.info = data.res.result
+    data.isEdit && respSuccess(data.res.message)
   }
 }
 

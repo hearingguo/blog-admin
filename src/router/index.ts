@@ -111,20 +111,20 @@ router.afterEach(transition => {
   NProgress.done()
 })
 
-router.beforeEach((to: Route, from: Route, next: any): void => {
-  NProgress.start()
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!sigin()) {
-      next({
-        path: '/login',
-        query: { redirect: to.fullPath }
-      })
-    } else {
-      next()
-    }
-  } else {
-    next()
-  }
-})
+// router.beforeEach((to: Route, from: Route, next: any): void => {
+//   NProgress.start()
+//   if (to.matched.some(record => record.meta.requiresAuth)) {
+//     if (!sigin()) {
+//       next({
+//         path: '/login',
+//         query: { redirect: to.fullPath }
+//       })
+//     } else {
+//       next()
+//     }
+//   } else {
+//     next()
+//   }
+// })
 
 export default router

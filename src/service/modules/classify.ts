@@ -13,8 +13,8 @@ export function getClassifies<T = undefined> (
 export function putClassify<T = undefined> (
   params: IClassifyItem
 ): Promise<Ajax.AjaxResponse<T>> {
-  const { title, description } = params
-  return ax.put<Ajax.AjaxResponse<T>>(`/classify/${params._id}`, { title, description })
+  const { title, name, description } = params
+  return ax.put<Ajax.AjaxResponse<T>>(`/classify/${params._id}`, { title, name, description })
           .then(res => res.data)
 }
 
