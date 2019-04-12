@@ -124,10 +124,14 @@ export default class Release extends Vue {
     if(this.paramsId && result) {
       const { createDate, meta, tag, updateDate, __v, ...rest } = result
       const tags = tag.map((item: ITagItem) => item._id)
-      console.log(tag)
       return { ...rest, tag: tags }
     }
-    return {}
+    return {
+      publish: 2,
+      state: 2,
+      content: '',
+      tag: []
+    }
   }
 
   private handleSaveArticle () {

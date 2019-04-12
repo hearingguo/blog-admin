@@ -1,8 +1,8 @@
 <template>
   <el-dialog width="30%"
     :title="modalTitle"
-    :visible="visible"
-    before-close="handleClose">
+    :visible.sync="visible"
+    :before-close="handleClose">
     <el-form ref="formTag" :model="formTag" label-width="40px">
       <el-form-item label="标题">
         <el-input v-model="formTag.title" placeholder="title..."></el-input>

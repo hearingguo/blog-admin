@@ -1,8 +1,8 @@
 <template>
   <el-dialog width="30%"
     :title="title"
-    :visible="visible"
-    before-close="handleClose">
+    :visible.sync="visible"
+    :before-close="handleClose">
     <el-form ref="formLink" :model="formLink" label-width="40px">
       <el-form-item label="名称">
         <el-input v-model="formLink.name" placeholder="name..."></el-input>

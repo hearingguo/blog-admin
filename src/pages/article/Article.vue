@@ -31,7 +31,7 @@
         <el-table-column prop="title" label="标题" width="200"></el-table-column>
         <el-table-column prop="classify" label="分类" width="100">
           <template slot-scope="scope">
-            {{ scope.row.classify.title }}
+            {{ scope.row.classify?scope.row.classify.title:'' }}
           </template>
         </el-table-column>
         <el-table-column prop="tag" label="标签">
